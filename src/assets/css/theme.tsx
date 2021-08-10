@@ -8,6 +8,9 @@ export interface themeProps {
       purpleLighten: string;
       white: string;
     };
+    shadows: {
+      primary: string;
+    };
   };
 }
 
@@ -19,5 +22,8 @@ export const theme = {
     purpleLight: '#928FA7',
     purpleLighten: '#C7C4DE',
     white: '#eee'
+  },
+  shadows: {
+    primary: '0 5px 5px rgba(0, 0, 0, 0.25)'
   }
 };

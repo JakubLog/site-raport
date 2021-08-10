@@ -7,7 +7,7 @@ export const GlobalStyles = createGlobalStyle`
     }
     html {
         scroll-behavior: smooth;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: Roboto, Helvetica, sans-serif;
     }
     body {
         margin: 20px;
