@@ -3,6 +3,7 @@ import { GlobalStyles } from 'assets/css/GlobalStyles';
 import { theme } from 'assets/css/theme';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router } from 'react-router-dom';
+import ErrorProvider from 'hooks/useError';
 
 interface props {
   children: React.ReactNode;
@@ -11,10 +12,12 @@ interface props {
 const AppProviders = ({ children }: props): JSX.Element => {
   return (
     <Router>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        {children}
-      </ThemeProvider>
+      <ErrorProvider>
+        <ThemeProvider theme={theme}>
+          <GlobalStyles />
+          {children}
+        </ThemeProvider>
+      </ErrorProvider>
     </Router>
   );
 };

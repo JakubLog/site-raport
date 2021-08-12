@@ -1,19 +1,25 @@
 import React from 'react';
 import MainTemplate from 'components/templates/MainTemplate';
 import { Switch, Route } from 'react-router-dom';
+import { useError } from 'hooks/useError';
+import Error from 'components/molecules/Error/Error';
 
 const App = (): JSX.Element => {
+  const { error } = useError();
   return (
-    <MainTemplate>
-      <Switch>
-        <Route path="/" exact>
-          Hello react
-        </Route>
-        <Route path="/news">Hello news</Route>
-        <Route path="/author">Hello author</Route>
-        <Route path="/contact">Hello contact</Route>
-      </Switch>
-    </MainTemplate>
+    <>
+      <MainTemplate>
+        <Switch>
+          <Route path="/" exact>
+            Hello react
+          </Route>
+          <Route path="/news">Hello news</Route>
+          <Route path="/author">Hello author</Route>
+          <Route path="/contact">Hello contact</Route>
+        </Switch>
+      </MainTemplate>
+      {error ? <Error message={error} /> : null}
+    </>
   );
 };
 
