@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { themeProps } from 'assets/css/theme';
 import { Paragraph } from 'components/atoms/Paragraph/Paragraph';
 
 export const Wrapper = styled.div`

@@ -7,7 +7,7 @@ interface props {
   title: string;
 }
 
-const Section = ({ children, title = 'Default title' }: props) => {
+const Section = ({ children, title = 'Default title' }: props): JSX.Element => {
   return (
     <Wrapper>
       <SectionTitle>{title}</SectionTitle>
