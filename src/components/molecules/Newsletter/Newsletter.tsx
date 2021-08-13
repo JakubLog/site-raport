@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Wrapper, AboutNewsletter } from './Newsletter.styles';
 import { Button } from 'components/atoms/Button/Button';
 import { Input } from 'components/atoms/Input/Input';
@@ -10,6 +10,8 @@ interface formProps {
 }
 
 const Newsletter = (): JSX.Element => {
+  const [isAdded, setIsAddedState] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -17,7 +19,7 @@ const Newsletter = (): JSX.Element => {
   } = useForm();
 
   const process = ({ email }: formProps) => {
-    console.log(email);
+    setIsAddedState(true);
   };
 
   return (
@@ -28,7 +30,7 @@ const Newsletter = (): JSX.Element => {
       <Form onSubmit={handleSubmit(process)}>
         <Input
           type="email"
-          placeholder={errors.email ? 'Podaj poprawny email!' : 'example@email.com'}
+          placeholder={errors.email && !isAdded ? 'Podaj poprawny email!' : 'example@email.com'}
           id="newsletter"
           {...register('email', {
             required: true,
@@ -36,7 +38,9 @@ const Newsletter = (): JSX.Element => {
             pattern: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
           })}
         />
-        <Button>Zapisz się</Button>
+        <Button aria-label="Zapisz się do newsletter'a" isDisabled={isAdded} disabled={isAdded ? true : false}>
+          {isAdded ? 'Dodano!' : 'Zapisz się'}
+        </Button>
       </Form>
     </Wrapper>
   );

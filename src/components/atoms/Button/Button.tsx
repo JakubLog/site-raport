@@ -1,7 +1,7 @@
 import { themeProps } from 'assets/css/theme';
 import styled from 'styled-components';
 
-export const Button = styled.button`
+export const Button = styled.button<{ isDisabled: boolean }>`
   background-color: ${({ theme }: themeProps) => theme.colors.purpleDark};
   font-size: 20px;
   padding: 10px 30px;
@@ -15,4 +15,5 @@ export const Button = styled.button`
     color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
     background-color: ${({ theme }: themeProps) => theme.colors.purpleDarken};
   }
+  opacity: ${({ isDisabled }) => (isDisabled ? 0.6 : 1)};
 `;
