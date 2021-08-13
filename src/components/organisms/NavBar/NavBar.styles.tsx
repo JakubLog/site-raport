@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
   padding-block: 15px;
   position: relative;
   box-shadow: ${({ theme }: themeProps) => theme.shadows.primary};
-  margin-bottom: 70px;
+  margin-bottom: 90px;
   @media (min-width: 768px) {
     height: 125px;
     justify-content: space-between;

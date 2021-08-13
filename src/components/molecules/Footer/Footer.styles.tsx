@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
   margin-top: 30px;
   background-color: ${({ theme }: themeProps) => theme.colors.purpleDarken};
   margin-left: -20px;
+  margin-bottom: -20px;
   @media (min-width: 768px) {
     padding-inline: 60px;
     font-size: 20px;
