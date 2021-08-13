@@ -30,10 +30,16 @@ export const NewsTitle = styled.h3`
     padding-top: 30px;
     font-size: 35px;
   }
+  transition: color 0.3s linear;
+  &:hover {
+    cursor: pointer;
+    color: ${({ theme }: themeProps) => theme.colors.purpleLight};
+  }
 `;
 
 export const NewsImage = styled.img`
   width: 100%;
+  transition: transform 0.3s ease-in-out;
   @media (min-width: 768px) {
     position: absolute;
     left: 50%;
@@ -44,9 +50,37 @@ export const NewsImage = styled.img`
 
 export const ImageWrapper = styled.div`
   overflow: hidden;
+  @media (max-width: 768px) {
+    &:hover ${NewsImage} {
+      cursor: pointer;
+      transform: scale(1.3);
+    }
+  }
   @media (min-width: 768px) {
     position: relative;
     background-color: ${({ theme }: themeProps) => theme.colors.purpleDarken};
+    &::after {
+      content: 'Czytaj...';
+      color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: ${({ theme }: themeProps) => theme.colors.purpleDarken};
+      opacity: 0;
+      cursor: pointer;
+      transition: opacity 0.2s linear;
+    }
+    &:hover {
+      &::after {
+        opacity: 0.6;
+      }
+    }
   }
 `;
 
@@ -64,6 +98,7 @@ export const NewsContent = styled.div`
   padding: 15px;
   color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
   border-radius: 0 0 20px 20px;
+  pointer-events: none;
   @media (min-width: 768px) {
     border-radius: 10px;
   }

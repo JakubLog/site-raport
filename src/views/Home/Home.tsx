@@ -2,20 +2,34 @@ import React from 'react';
 import Hero from 'components/molecules/Hero/Hero';
 import Section from 'components/molecules/Section/Section';
 import LatestNews from 'components/organisms/LatestNews/LatestNews';
-import HeroSrc from 'assets/img/hero.jpg';
 import Newsletter from 'components/molecules/Newsletter/Newsletter';
 import { Wrapper, AboutUs } from './Home.styles';
+import { useQuery } from 'graphql-hooks';
+import Loading from 'components/molecules/Loading/Loading';
+
+interface newsProps {
+  id: string;
+  title: string;
+  description: string;
+  image: {
+    url: string;
+  };
+}
 
 const Home = (): JSX.Element => {
+  const { data, loading: isLoadingNews } = useQuery(`{articles(last: 1){id,image{url},title,description}}`);
+
   return (
     <Wrapper>
       <Hero />
       <Section title="Latest News 📰">
-        <LatestNews
-          title="SBM Festival v.5 - Zobacz nasz opis wydarzenia roku"
-          description="Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem  Lorem ipsum dolor sit amet, consectetur adipisicing elit ipsum dolor sit amet, consectetur adipisicing elit"
-          imageSrc={HeroSrc}
-        />
+        {isLoadingNews ? (
+          <Loading />
+        ) : (
+          data.articles.map(({ id, title, description, image: { url } }: newsProps) => (
+            <LatestNews key={id} postId={id} title={title} description={description} imageSrc={url} />
+          ))
+        )}
       </Section>
       <Section title="About us">
         <AboutUs>
