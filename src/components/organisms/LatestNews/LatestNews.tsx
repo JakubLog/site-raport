@@ -12,7 +12,7 @@ interface props {
 
 const LatestNews = ({ postId, title, description, imageSrc }: props): JSX.Element => {
   const history = useHistory();
-  const postUrl = `/${postId}`;
+  const postUrl = `/post/${postId}`;
 
   return (
     <Wrapper aria-label={title}>
