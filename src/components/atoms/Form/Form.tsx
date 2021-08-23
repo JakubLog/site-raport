@@ -7,6 +7,9 @@ export const Form = styled.form`
   & > input {
     margin-bottom: 15px;
   }
+  & > * {
+    width: 100%;
+  }
   @media (min-width: 768px) {
     align-items: flex-start;
   }

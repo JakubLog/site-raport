@@ -5,6 +5,7 @@ import { useError } from 'hooks/useError';
 import Error from 'components/molecules/Error/Error';
 import Home from './Home/Home';
 import Post from './Post/Post';
+import Authenticate from './Authenticate/Authenticate';
 
 const App = (): JSX.Element => {
   const { error } = useError();
@@ -19,8 +20,10 @@ const App = (): JSX.Element => {
             <Post />
           </Route>
           <Route path="/news">Hello news</Route>
-          <Route path="/author">Hello author</Route>
-          <Route path="/contact">Hello contact</Route>
+          <Route path="/profile">
+            <Authenticate />
+          </Route>
+          <Route path="/contact">Sign in</Route>
         </Switch>
       </MainTemplate>
       {error ? <Error message={error} /> : null}

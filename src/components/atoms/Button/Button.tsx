@@ -1,7 +1,7 @@
 import { themeProps } from 'assets/css/theme';
 import styled from 'styled-components';
 
-export const Button = styled.button<{ isDisabled: boolean }>`
+export const Button = styled.button<Partial<{ isDisabled: boolean }>>`
   background-color: ${({ theme }: themeProps) => theme.colors.purpleDark};
   font-size: 20px;
   padding: 10px 30px;
