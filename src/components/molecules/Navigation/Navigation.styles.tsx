@@ -38,6 +38,9 @@ export const StyledLink = styled(NavLink).attrs({ activeClassName })`
   }
   &.${activeClassName} {
     color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
+    @media (max-width: 768px) {
+      background-color: ${({ theme }: themeProps) => theme.colors.purpleDarken};
+    }
   }
   @media (min-width: 768px) {
     position: relative;

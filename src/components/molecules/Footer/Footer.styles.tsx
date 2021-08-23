@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   padding-inline: 20px;
-  margin-top: 30px;
+  margin-top: 60px;
   background-color: ${({ theme }: themeProps) => theme.colors.purpleDarken};
   margin-left: -20px;
   margin-bottom: -20px;
