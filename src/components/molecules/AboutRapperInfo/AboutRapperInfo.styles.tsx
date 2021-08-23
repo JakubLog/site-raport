@@ -21,6 +21,11 @@ export const RapperImage = styled.img`
 `;
 
 export const RapperParagraph = styled(Paragraph)`
-  width: 60%;
+  width: 85%;
   margin: 0 auto;
+  line-height: 1.5;
+  @media (min-width: 768px) {
+    width: 60%;
+    line-height: 1.2;
+  }
 `;

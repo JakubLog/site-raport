@@ -9,7 +9,7 @@ interface props {
   imageSrc: string;
 }
 
-const AboutRapperInfo = ({ name, description, imageSrc }: props) => {
+const AboutRapperInfo = ({ name, description, imageSrc }: props): JSX.Element => {
   return (
     <InfoWrapper>
       <RapperImage src={imageSrc} alt={name} />
