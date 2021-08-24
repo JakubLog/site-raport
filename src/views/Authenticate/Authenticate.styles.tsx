@@ -30,9 +30,13 @@ export const StyledForm = styled(Form)`
       margin-bottom: 30px;
     }
   }
+  & > p {
+    margin-top: -15px;
+    margin-bottom: 15px;
+  }
 `;
 
-export const Info = styled(Title)`
+export const Info = styled.div`
   text-align: center;
   @media (min-width: 768px) {
     text-align: right;

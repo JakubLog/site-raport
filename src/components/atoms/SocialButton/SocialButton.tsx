@@ -11,6 +11,7 @@ export const SocialButton = styled.button`
   color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
   font-size: 30px;
   transition: 0.3s background-color linear;
+  box-shadow: ${({ theme }: themeProps) => theme.shadows.primary};
   &:first-child {
     margin-left: 0;
     @media (min-width: 768px) {
