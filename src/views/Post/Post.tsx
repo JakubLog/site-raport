@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from 'graphql-hooks';
 import Loading from 'components/molecules/Loading/Loading';
 import { Image, StyledTitle, Description, Author } from './Post.styles';
+import Share from 'components/molecules/Share/Share';
 
 interface postProps {
   id: string;
@@ -60,6 +61,7 @@ const Post = (): JSX.Element => {
             <Author>
               {name} | {postTime}
             </Author>
+            <Share url={window.location.href} />
           </div>
         ))
       )}
