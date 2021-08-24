@@ -1,11 +1,13 @@
 import React from 'react';
 import { SocialButtons as SocialButtonsWrapper } from './SocialButtons.styles';
 import { SocialButton } from 'components/atoms/SocialButton/SocialButton';
+import { useAuth } from 'hooks/useAuth';
 
 const SocialButtons = (): JSX.Element => {
+  const { loginWithGoogle } = useAuth();
   return (
     <SocialButtonsWrapper>
-      <SocialButton>Google</SocialButton>
+      <SocialButton onClick={loginWithGoogle}>Google</SocialButton>
     </SocialButtonsWrapper>
   );
 };

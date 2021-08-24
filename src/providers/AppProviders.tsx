@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ErrorProvider from 'hooks/useError';
 import { GraphQLClient, ClientContext } from 'graphql-hooks';
+import AuthProvider from 'hooks/useAuth';
 
 interface props {
   children: React.ReactNode;
@@ -19,10 +20,12 @@ const AppProviders = ({ children }: props): JSX.Element => {
     <Router>
       <ErrorProvider>
         <ClientContext.Provider value={client}>
-          <ThemeProvider theme={theme}>
-            <GlobalStyles />
-            {children}
-          </ThemeProvider>
+          <AuthProvider>
+            <ThemeProvider theme={theme}>
+              <GlobalStyles />
+              {children}
+            </ThemeProvider>
+          </AuthProvider>
         </ClientContext.Provider>
       </ErrorProvider>
     </Router>

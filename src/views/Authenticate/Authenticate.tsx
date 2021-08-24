@@ -5,6 +5,8 @@ import SocialButtons from 'components/molecules/SocialButtons/SocialButtons';
 import { useForm } from 'react-hook-form';
 import { Info, StyledSubtitle, StyledForm, StyledTitle, Block } from './Authenticate.styles';
 import { ErrorParagraph } from 'components/atoms/ErrorParagraph/ErrorParagraph';
+import { useAuth } from 'hooks/useAuth';
+import { useError } from 'hooks/useError';
 
 interface signInProps {
   email: string;
@@ -17,9 +19,17 @@ interface signUpProps {
 }
 
 const Authenticate = (): JSX.Element => {
+  // States
   const [signInError, setSignInError] = useState<boolean | null>(null);
   const [signUpError, setSignUpError] = useState<boolean | null>(null);
 
+  // Error handling
+  const { dispatchError } = useError();
+
+  // Auth hook methods
+  const { register, login, authUser } = useAuth();
+
+  // Controlled inputs configuration
   const {
     register: registerSignIn,
     handleSubmit: signInFunction,
@@ -32,14 +42,29 @@ const Authenticate = (): JSX.Element => {
     formState: { errors: signUpErrors }
   } = useForm();
 
-  const signin = (data: signInProps) => {
-    console.log(data);
+  // Forms methods
+  const signin = async (data: signInProps) => {
+    setSignInError(null);
+    try {
+      if (!login) {
+        const errMessage = 'Something went wrong with authorization.';
+        return dispatchError ? dispatchError(errMessage) : console.error(errMessage);
+      }
+      await login(data);
+    } catch (e) {
+      setSignInError(true);
+    }
   };
 
-  const signup = (data: signUpProps) => {
+  const signup = async (data: signUpProps) => {
     setSignUpError(null);
     try {
       if (data.newPassword !== data.confirmPassword) throw new Error('Passwords not match!');
+      if (!register) {
+        const errMessage = 'Something went wrong with authorization.';
+        return dispatchError ? dispatchError(errMessage) : console.error(errMessage);
+      }
+      await register(data);
     } catch (e) {
       setSignUpError(true);
     }
@@ -109,7 +134,11 @@ const Authenticate = (): JSX.Element => {
             {...registerSignUp('confirmPassword', { required: true, minLength: 6 })}
           />
           {signUpErrors.confirmPassword && <ErrorParagraph>To pole jest wymagane!</ErrorParagraph>}
-          {signUpError && <ErrorParagraph>Hasła nie są takie same!</ErrorParagraph>}
+          {signUpError && (
+            <ErrorParagraph>
+              Hmmm... wygląda na to, że twoje hasła nie są takie same, badź ktoś już posiada konto o takim adresie e-mail!
+            </ErrorParagraph>
+          )}
           <Button type="submit">Zarejestruj się</Button>
         </StyledForm>
       </Block>
