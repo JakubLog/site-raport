@@ -27,7 +27,7 @@ const Authenticate = (): JSX.Element => {
   const { dispatchError } = useError();
 
   // Auth hook methods
-  const { register, login, authUser } = useAuth();
+  const { register, login } = useAuth();
 
   // Controlled inputs configuration
   const {
