@@ -12,7 +12,7 @@ interface authContextInterface {
   authUser: Partial<firebase.User> | null;
   login: (data: { email: string; password: string }) => Promise<firebase.auth.UserCredential>;
   loginWithGoogle: () => Promise<void>;
-  register: (data: { newemail: string; newpassword: string }) => Promise<firebase.auth.UserCredential>;
+  register: (data: { newEmail: string; newPassword: string; confirmPassword: string }) => Promise<firebase.auth.UserCredential>;
   logout: () => Promise<void>;
 }
 
@@ -29,14 +29,16 @@ const AuthProvider = ({ children }: props): JSX.Element => {
     const provider = new firebase.auth.GoogleAuthProvider();
     return auth.signInWithRedirect(provider);
   };
-  const register = ({ newemail: email, newpassword: password }: { newemail: string; newpassword: string }) =>
+  const register = ({ newEmail: email, newPassword: password }: { newEmail: string; newPassword: string; confirmPassword: string }) =>
     auth.createUserWithEmailAndPassword(email, password);
   const logout = () => auth.signOut();
 
   // User mounting and demounting
   useEffect(() => {
-    const unregister = auth.onAuthStateChanged((user) => setCurrentUser(user));
-    setLoadingState(false);
+    const unregister = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+      setLoadingState(false);
+    });
 
     return unregister;
   }, []);
@@ -50,10 +52,10 @@ const AuthProvider = ({ children }: props): JSX.Element => {
     logout
   };
 
-  return <AuthContext.Provider value={value}>{!isLoading && children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={value}>{isLoading ? <p>Loading...</p> : children}</AuthContext.Provider>;
 };
 
-export const useAuth = (): Partial<authContextInterface> | void => {
+export const useAuth = (): Partial<authContextInterface> => {
   const { dispatchError } = useError();
 
   const auth = useContext(AuthContext);
@@ -61,7 +63,6 @@ export const useAuth = (): Partial<authContextInterface> | void => {
   if (!auth) {
     const errMessage = 'Auth is not available now, we so sorry! Please try again later.';
     dispatchError ? dispatchError(errMessage) : console.error(errMessage);
-    return;
   }
 
   return auth;
