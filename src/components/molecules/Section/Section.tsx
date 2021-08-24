@@ -5,19 +5,21 @@ import { SectionBody, SectionTitle, Wrapper } from './Section.styles';
 interface props {
   children: React.ReactNode;
   title: string;
+  fullScreen?: boolean;
 }
 
-const Section = ({ children, title = 'Default title' }: props): JSX.Element => {
+const Section = ({ children, fullScreen = false, title = 'Default title' }: props): JSX.Element => {
   return (
-    <Wrapper>
-      <SectionTitle>{title}</SectionTitle>
+    <Wrapper fullScreen={fullScreen}>
+      <SectionTitle fullScreen={fullScreen}>{title}</SectionTitle>
       <SectionBody>{children}</SectionBody>
     </Wrapper>
   );
 };
 
 Section.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  fullScreen: PropTypes.bool
 };
 
 export default Section;
