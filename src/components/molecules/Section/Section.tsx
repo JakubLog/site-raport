@@ -8,9 +8,9 @@ interface props {
   fullScreen?: boolean;
 }
 
-const Section = ({ children, fullScreen = false, title = 'Default title' }: props): JSX.Element => {
+const Section = ({ children, fullScreen = false, title = 'Default title', ...rest }: props): JSX.Element => {
   return (
-    <Wrapper fullScreen={fullScreen}>
+    <Wrapper fullScreen={fullScreen} {...rest}>
       <SectionTitle fullScreen={fullScreen}>{title}</SectionTitle>
       <SectionBody>{children}</SectionBody>
     </Wrapper>
