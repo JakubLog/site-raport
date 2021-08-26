@@ -7,8 +7,11 @@ export const Image = styled.img`
   position: absolute;
   left: 0;
   top: 0;
+  opacity: 0.5;
 `;
-export const Content = styled.div`
+export const Content = styled.a`
+  text-decoration: none;
+  color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
   position: absolute;
   top: 50%;
   left: 0;
@@ -26,11 +29,17 @@ export const Content = styled.div`
     top: 0;
     background-color: ${({ theme }: themeProps) => theme.colors.purpleDarken};
     opacity: 0.5;
+    transition: opacity 0.2s ease-in-out;
   }
   & > p {
     text-align: center;
     margin: 0;
     font-size: 30px;
     color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
+  }
+  &:hover {
+    &::before {
+      opacity: 0.8;
+    }
   }
 `;

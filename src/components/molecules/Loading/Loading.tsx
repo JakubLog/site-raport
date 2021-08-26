@@ -1,13 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { LoadingWrapper, LoadingIcon, LoadingText } from './Loading.styles';
 
-const Loading = (): JSX.Element => {
+interface props {
+  autoSize?: boolean;
+}
+
+const Loading = ({ autoSize = false }: props): JSX.Element => {
   return (
-    <LoadingWrapper>
-      <LoadingText>Loading...</LoadingText>
+    <LoadingWrapper autoSize>
+      {!autoSize && <LoadingText>Loading...</LoadingText>}
       <LoadingIcon />
     </LoadingWrapper>
   );
+};
+
+Loading.propTypes = {
+  autoSize: PropTypes.bool
 };
 
 export default Loading;

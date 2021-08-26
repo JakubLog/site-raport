@@ -9,9 +9,9 @@ const rotate = keyframes`
     }
 `;
 
-export const LoadingWrapper = styled.div`
+export const LoadingWrapper = styled.div<{ autoSize: boolean }>`
   width: 100%;
-  height: 600px;
+  height: ${({ autoSize }) => (autoSize ? '100%' : '600px')};
   background-color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
   display: flex;
   align-items: center;

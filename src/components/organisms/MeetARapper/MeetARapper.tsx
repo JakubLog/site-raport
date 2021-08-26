@@ -10,11 +10,11 @@ const MeetARapper = (): JSX.Element => {
   return (
     <FeedBase title="Meet A Rapper" height="250" bgColor="#313044">
       {loading ? (
-        <Loading />
+        <Loading autoSize />
       ) : (
         <>
           <Image src={data.rappers[0].image.url} alt={data.rappers[0].name} />
-          <Content>
+          <Content href={`https://genius.com/artists/${data.rappers[0].name}`} target="_blank">
             <p>{data.rappers[0].name}</p>
           </Content>
         </>
