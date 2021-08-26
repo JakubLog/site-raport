@@ -8,7 +8,7 @@ interface props {
 
 const Loading = ({ autoSize = false }: props): JSX.Element => {
   return (
-    <LoadingWrapper autoSize>
+    <LoadingWrapper autoSize={autoSize}>
       {!autoSize && <LoadingText>Loading...</LoadingText>}
       <LoadingIcon />
     </LoadingWrapper>

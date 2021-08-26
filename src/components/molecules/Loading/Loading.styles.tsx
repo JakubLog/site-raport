@@ -11,7 +11,9 @@ const rotate = keyframes`
 
 export const LoadingWrapper = styled.div<{ autoSize: boolean }>`
   width: 100%;
-  height: ${({ autoSize }) => (autoSize ? '100%' : '600px')};
+  min-height: ${({ autoSize }) => {
+    return autoSize ? '100%' : '600px';
+  }};
   background-color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
   display: flex;
   align-items: center;
