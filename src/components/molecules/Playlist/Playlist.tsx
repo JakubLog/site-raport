@@ -10,7 +10,7 @@ interface props {
 
 const Playlist = ({ name, imageSrc, link }: props): JSX.Element => {
   return (
-    <Wrapper href={link}>
+    <Wrapper href={link} target="_blank">
       <Image src={imageSrc} alt={name} />
       <Name>{name}</Name>
     </Wrapper>
