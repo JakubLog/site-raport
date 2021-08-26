@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 import { themeProps } from 'assets/css/theme';
+import { Wrapper } from 'components/atoms/Wrapper/Wrapper';
 
-export const HeroWrapper = styled.div`
+export const HeroWrapper = styled(Wrapper)`
   width: 100%;
   height: calc(100vh - 230px);
   position: relative;
   overflow: hidden;
-  border-radius: 25px;
-  box-shadow: ${({ theme }: themeProps) => theme.shadows.primary};
   @media (min-width: 768px) {
     height: calc(100vh - 195px);
   }

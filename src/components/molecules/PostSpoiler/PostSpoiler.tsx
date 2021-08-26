@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Wrapper, Header, Image, Title, Snippet, Content } from './PostSpoiler.styles';
+import { StyledWrapper, Header, Image, Title, Snippet, Content } from './PostSpoiler.styles';
 import { useHistory } from 'react-router-dom';
 
 interface props {
@@ -19,17 +19,19 @@ const PostSpoiler = ({
   const history = useHistory();
 
   return (
-    <Wrapper>
+    <StyledWrapper>
       <Header onClick={() => history.push(postUrl)}>
         <Image src={imageSrc} alt={title} />
-        <Title>{title}</Title>
+        <Title>
+          <p>{title}</p>
+        </Title>
       </Header>
       <Snippet>
         <Content>
           <p>{description}</p>
         </Content>
       </Snippet>
-    </Wrapper>
+    </StyledWrapper>
   );
 };
 

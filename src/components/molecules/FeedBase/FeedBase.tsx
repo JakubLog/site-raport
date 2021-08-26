@@ -1,36 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import styled from 'styled-components';
-import { themeProps } from 'assets/css/theme';
-
-export const Wrapper = styled.div<{ height: string; bgColor: string }>`
-  width: 100%;
-  height: ${({ height }) => height}px;
-  background-color: ${({ bgColor }) => bgColor};
-  border-radius: 20px;
-  display: grid;
-  grid-template-rows: 50px auto;
-  box-shadow: ${({ theme }: themeProps) => theme.shadows.primary};
-  overflow: hidden;
-`;
-
-export const Header = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const Title = styled.h1`
-  font-size: 25px;
-  color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
-  font-weight: 400;
-  letter-spacing: 1px;
-`;
-
-export const Content = styled.div`
-  position: relative;
-`;
+import { StyledWrapper, Header, Title, Content } from './FeedBase.styles';
 
 interface props {
   children: React.ReactNode;
@@ -41,12 +11,12 @@ interface props {
 
 const FeedBase = ({ children, height, bgColor, title }: props): JSX.Element => {
   return (
-    <Wrapper bgColor={bgColor} height={height}>
+    <StyledWrapper bgColor={bgColor} height={height}>
       <Header>
         <Title>{title}</Title>
       </Header>
       <Content>{children}</Content>
-    </Wrapper>
+    </StyledWrapper>
   );
 };
 

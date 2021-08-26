@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { themeProps } from 'assets/css/theme';
+import { Wrapper } from 'components/atoms/Wrapper/Wrapper';
 
-export const Wrapper = styled.div`
+export const StyledWrapper = styled(Wrapper)`
   height: 360px;
-  box-shadow: ${({ theme }: themeProps) => theme.shadows.primary};
   border-radius: 5px;
   overflow: hidden;
   &:not(:last-child) {
@@ -26,7 +26,15 @@ export const Title = styled.div`
   transition: color 0.3s ease-in;
   @media (min-width: 768px) {
     font-size: 40px;
-  } ;
+  }
+  & > p {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+  }
 `;
 export const Header = styled.div`
   height: 119px;
