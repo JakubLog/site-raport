@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyledWrapper, ImageWrapper, NewsImage, ContentWrapper, NewsTitle, NewsContent, NewsParagraph } from './LatestNews.styles';
+import { StyledWrapper, ImageWrapper, NewsImage, ContentWrapper, NewsTitle, NewsContent, NewsParagraph } from './ShortNews.styles';
 import { useHistory } from 'react-router-dom';
 
 interface props {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Hero from 'components/molecules/Hero/Hero';
 import Section from 'components/molecules/Section/Section';
-import LatestNews from 'components/organisms/LatestNews/LatestNews';
+import LatestNews from 'components/organisms/ShortNews/ShortNews';
 import Newsletter from 'components/molecules/Newsletter/Newsletter';
 import { Wrapper, AboutUs } from './Home.styles';
 import { useQuery } from 'graphql-hooks';

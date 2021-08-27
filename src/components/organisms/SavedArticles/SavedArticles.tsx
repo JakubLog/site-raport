@@ -1,5 +1,5 @@
 import React from 'react';
-import LatestNews from '../LatestNews/LatestNews';
+import LatestNews from '../ShortNews/ShortNews';
 import { StyledWrapper, Header, StyledTitle, StyledSubTitle, Content, Fav } from './SavedArticles.styles';
 
 const SavedArticles = (): JSX.Element => {

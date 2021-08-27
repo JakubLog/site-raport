@@ -8,7 +8,8 @@ export const StyledButton = styled(Button)<{ isActive: boolean }>`
   box-shadow: none;
   background-color: transparent;
   color: ${({ theme }: themeProps) => theme.colors.purpleLight};
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: unset;
     color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
   }
