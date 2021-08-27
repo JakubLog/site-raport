@@ -6,6 +6,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import ErrorProvider from 'hooks/useError';
 import { GraphQLClient, ClientContext } from 'graphql-hooks';
 import AuthProvider from 'hooks/useAuth';
+import { Provider } from 'react-redux';
+import { store } from 'store';
 
 interface props {
   children: React.ReactNode;
@@ -17,18 +19,20 @@ const client = new GraphQLClient({
 
 const AppProviders = ({ children }: props): JSX.Element => {
   return (
-    <Router>
-      <ErrorProvider>
-        <ClientContext.Provider value={client}>
-          <AuthProvider>
-            <ThemeProvider theme={theme}>
-              <GlobalStyles />
-              {children}
-            </ThemeProvider>
-          </AuthProvider>
-        </ClientContext.Provider>
-      </ErrorProvider>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <ErrorProvider>
+          <ClientContext.Provider value={client}>
+            <AuthProvider>
+              <ThemeProvider theme={theme}>
+                <GlobalStyles />
+                {children}
+              </ThemeProvider>
+            </AuthProvider>
+          </ClientContext.Provider>
+        </ErrorProvider>
+      </Router>
+    </Provider>
   );
 };
 
