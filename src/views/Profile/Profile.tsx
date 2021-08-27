@@ -1,14 +1,16 @@
-import { Button } from 'components/atoms/Button/Button';
-import { useAuth } from 'hooks/useAuth';
 import React from 'react';
-// import {} from './Profile.styles';
+import AboutProfile from 'components/organisms/AboutProfile/AboutProfile';
+import Bio from 'components/organisms/Bio/Bio';
+import { Wrapper } from './Profile.styles';
+import SavedArticles from 'components/organisms/SavedArticles/SavedArticles';
 
 const Profile = (): JSX.Element => {
-  const { logout } = useAuth();
   return (
-    <div>
-      <Button onClick={logout}>Wyloguj się</Button>
-    </div>
+    <Wrapper>
+      <AboutProfile />
+      <Bio />
+      <SavedArticles />
+    </Wrapper>
   );
 };
 

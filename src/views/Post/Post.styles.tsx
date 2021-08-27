@@ -4,7 +4,7 @@ import { Title } from 'components/atoms/Title/Title';
 
 export const Image = styled.img`
   width: 100%;
-  border-radius: 20px;
+  border-radius: 25px;
   box-shadow: ${({ theme }: themeProps) => theme.shadows.primary};
   @media (min-width: 768px) {
     width: 35%;
