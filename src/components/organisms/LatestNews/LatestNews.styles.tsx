@@ -1,17 +1,15 @@
 import styled from 'styled-components';
 import { themeProps } from 'assets/css/theme';
+import { Wrapper } from 'components/atoms/Wrapper/Wrapper';
 
-export const Wrapper = styled.div`
+export const StyledWrapper = styled(Wrapper)`
   width: 100%;
   max-width: 1500px;
   margin: 0 auto;
   height: 500px;
   background-color: ${({ theme }: themeProps) => theme.colors.purpleDark};
-  border-radius: 25px;
-  overflow: hidden;
   display: grid;
   grid-template-rows: 50% 50%;
-  box-shadow: ${({ theme }: themeProps) => theme.shadows.primary};
   @media (min-width: 768px) {
     grid-template-rows: 1fr;
     grid-template-columns: 50% 50%;

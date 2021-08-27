@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { themeProps } from 'assets/css/theme';
+import { Wrapper } from 'components/atoms/Wrapper/Wrapper';
 
-export const Wrapper = styled.div`
-  width: 100%;
+export const StyledWrapper = styled(Wrapper)`
+  overflow: visible;
   height: 100px;
   background-color: ${({ theme }: themeProps) => theme.colors.purpleDark};
   border-radius: 20px;
@@ -11,7 +12,6 @@ export const Wrapper = styled.div`
   justify-content: center;
   padding-block: 15px;
   position: relative;
-  box-shadow: ${({ theme }: themeProps) => theme.shadows.primary};
   margin-bottom: 90px;
   @media (min-width: 768px) {
     height: 125px;

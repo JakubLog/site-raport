@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Wrapper, ImageWrapper, NewsImage, ContentWrapper, NewsTitle, NewsContent, NewsParagraph } from './LatestNews.styles';
+import { StyledWrapper, ImageWrapper, NewsImage, ContentWrapper, NewsTitle, NewsContent, NewsParagraph } from './LatestNews.styles';
 import { useHistory } from 'react-router-dom';
 
 interface props {
@@ -15,7 +15,7 @@ const LatestNews = ({ postId, title, description, imageSrc }: props): JSX.Elemen
   const postUrl = `/post/${postId}`;
 
   return (
-    <Wrapper aria-label={title}>
+    <StyledWrapper aria-label={title}>
       <ImageWrapper onClick={() => history.push(postUrl)}>
         <NewsImage src={imageSrc} alt={title} />
       </ImageWrapper>
@@ -25,7 +25,7 @@ const LatestNews = ({ postId, title, description, imageSrc }: props): JSX.Elemen
           <NewsParagraph>{description}</NewsParagraph>
         </NewsContent>
       </ContentWrapper>
-    </Wrapper>
+    </StyledWrapper>
   );
 };
 
