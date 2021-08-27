@@ -8,6 +8,14 @@ export const GlobalStyles = createGlobalStyle`
     html {
         scroll-behavior: smooth;
         font-family: Roboto, Helvetica, sans-serif;
+        ::-webkit-scrollbar {
+            width: 10px;
+            background-color: ${({ theme }: themeProps) => theme.colors.purpleDark};
+        }
+        ::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background-color: ${({ theme }: themeProps) => theme.colors.purpleLight}
+        }
     }
     body {
         margin: 20px;
