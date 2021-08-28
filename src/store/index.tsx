@@ -1,4 +1,4 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit';
+import { createSlice, configureStore, combineReducers } from '@reduxjs/toolkit';
 
 const edit = createSlice({
   name: 'edit',
@@ -12,8 +12,12 @@ const edit = createSlice({
 
 export const { changeEditionState } = edit.actions;
 
-export const store = configureStore({
-  reducer: {
-    edit: edit.reducer
-  }
+const SliceReducers = combineReducers({
+  edit: edit.reducer
 });
+
+export const store = configureStore({
+  reducer: SliceReducers
+});
+
+export type RootTypes = ReturnType<typeof SliceReducers>;

@@ -51,6 +51,7 @@ export const StyledTitle = styled(Title)`
   color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
   font-size: 25px;
   font-weight: 400;
+  text-align: center;
   @media (min-width: 768px) {
     font-size: 40px;
     z-index: 10;
