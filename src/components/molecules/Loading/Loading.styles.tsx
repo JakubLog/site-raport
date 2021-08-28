@@ -9,11 +9,20 @@ const rotate = keyframes`
     }
 `;
 
-export const LoadingWrapper = styled.div<{ autoSize: boolean }>`
-  width: 100%;
+export const LoadingWrapper = styled.div<{ autoSize: boolean; fullScreen: boolean }>`
+  width: ${({ fullScreen }) => (fullScreen ? '100vw' : '100%')};
   min-height: ${({ autoSize }) => {
     return autoSize ? '100%' : '600px';
   }};
+  ${({ fullScreen }) =>
+    fullScreen
+      ? `
+    position: absolute !important;
+    left: 0;
+    top: 0;
+    height: 100vh;
+  `
+      : null}
   background-color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
   display: flex;
   align-items: center;

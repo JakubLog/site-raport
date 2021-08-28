@@ -1,3 +1,4 @@
+import Loading from 'components/molecules/Loading/Loading';
 import firebase from 'firebase';
 import { auth } from 'firebaseConfig';
 import React, { createContext, useState, useEffect, useContext } from 'react';
@@ -52,7 +53,7 @@ const AuthProvider = ({ children }: props): JSX.Element => {
     logout
   };
 
-  return <AuthContext.Provider value={value}>{isLoading ? <p>Loading...</p> : children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={value}>{isLoading ? <Loading fullScreen /> : children}</AuthContext.Provider>;
 };
 
 export const useAuth = (): Partial<authContextInterface> => {

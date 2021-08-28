@@ -23,12 +23,10 @@ const AppProviders = ({ children }: props): JSX.Element => {
       <Router>
         <ErrorProvider>
           <ClientContext.Provider value={client}>
-            <AuthProvider>
-              <ThemeProvider theme={theme}>
-                <GlobalStyles />
-                {children}
-              </ThemeProvider>
-            </AuthProvider>
+            <ThemeProvider theme={theme}>
+              <GlobalStyles />
+              <AuthProvider>{children}</AuthProvider>
+            </ThemeProvider>
           </ClientContext.Provider>
         </ErrorProvider>
       </Router>
