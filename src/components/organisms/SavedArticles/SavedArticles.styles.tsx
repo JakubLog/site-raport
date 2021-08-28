@@ -6,6 +6,9 @@ import { Title } from 'components/atoms/Title/Title';
 export const StyledWrapper = styled(Wrapper)`
   background-color: ${({ theme }: themeProps) => theme.colors.purpleDarken};
   color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
+  @media (min-width: 768px) {
+    display: flex;
+  }
 `;
 export const Header = styled.div`
   display: flex;
@@ -13,18 +16,30 @@ export const Header = styled.div`
   justify-content: center;
   padding: 30px;
   flex-direction: column;
-  & > * {
+  @media (min-width: 768px) {
+    display: block;
+    flex: 50%;
   }
 `;
 export const StyledTitle = styled(Title)`
   font-size: 30px;
   font-weight: 400;
+  @media (min-width: 768px) {
+    font-size: 60px;
+    text-align: right;
+  }
 `;
 export const StyledSubTitle = styled(Title)`
   font-size: 20px;
   opacity: 0.7;
   text-align: center;
   font-weight: 400;
+  @media (min-width: 768px) {
+    font-size: 30px;
+    text-align: right;
+    letter-spacing: 2px;
+    line-height: 1.5;
+  }
 `;
 export const Content = styled.div`
   scroll-snap-type: y mandatory;
@@ -45,6 +60,9 @@ export const Content = styled.div`
   ::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background-color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
+  }
+  @media (min-width: 768px) {
+    flex: 50%;
   }
 `;
 

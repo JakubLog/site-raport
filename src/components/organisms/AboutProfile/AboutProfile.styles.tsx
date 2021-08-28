@@ -10,6 +10,16 @@ export const StyledWrapper = styled(Wrapper)`
       margin-bottom: 30px;
     }
   }
+  @media (min-width: 1335px) {
+    display: grid;
+    grid-template-areas:
+      'img img img img if if if if if if'
+      'img img img img if if if if if if'
+      'img img img img if if if if if if'
+      'b b b b b b b b b b';
+
+    grid-gap: 15px;
+  }
 `;
 
 export const ImageWrapper = styled.div`
@@ -21,6 +31,10 @@ export const ImageWrapper = styled.div`
   border-radius: 50%;
   position: relative;
   box-shadow: ${({ theme }: themeProps) => theme.shadows.primary};
+  @media (min-width: 1335px) {
+    grid-area: img;
+    background-color: ${({ theme }: themeProps) => theme.colors.purpleDarken};
+  }
 `;
 export const Image = styled.img`
   position: absolute;
@@ -38,9 +52,19 @@ export const Informations = styled(Wrapper)`
     margin: 0;
     text-align: center;
   }
+  @media (min-width: 1335px) {
+    grid-area: if;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
 `;
 export const Name = styled.h2`
   font-weight: 400;
+  @media (min-width: 1335px) {
+    font-size: 60px;
+  }
 `;
 export const Email = styled.a`
   text-decoration: none;
@@ -50,8 +74,14 @@ export const Email = styled.a`
   &:hover {
     text-decoration: underline;
   }
+  @media (min-width: 1335px) {
+    font-size: 30px;
+  }
 `;
 
 export const StyledButton = styled(Button)`
   width: 100%;
+  @media (min-width: 1335px) {
+    grid-area: b;
+  }
 `;

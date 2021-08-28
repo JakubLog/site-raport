@@ -6,6 +6,7 @@ export const StyledButton = styled(Button)<{ isActive: boolean }>`
   width: fit-content;
   padding: 0;
   box-shadow: none;
+  z-index: 100;
   background-color: transparent;
   color: ${({ theme }: themeProps) => theme.colors.purpleLight};
   &:hover,
@@ -15,5 +16,8 @@ export const StyledButton = styled(Button)<{ isActive: boolean }>`
   }
   & > * {
     margin: 0;
+  }
+  @media (min-width: 768px) {
+    font-size: 30px;
   }
 `;
