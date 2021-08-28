@@ -35,18 +35,28 @@ const Post = (): JSX.Element => {
     }
   }
   `;
-  const { data: postInfo, loading: postLoading } = useQuery(query);
+  const { data: postInfo, loading: postLoading, error: postError } = useQuery(query);
 
   const [postTime, setPostTime] = useState('Loading...');
   useEffect(() => {
-    if (!postLoading) {
-      const UNIX = Date.parse(postInfo.articles[0].createdBy.createdAt);
+    if (!postLoading && !postError) {
+      const UNIX = Date.parse(postInfo.articles[0]?.createdBy.createdAt);
       const time = new Date(UNIX);
       const parsed = `${time.getDay()}.${time.getMonth()}.${time.getFullYear()} - ${time.getHours()}:${time.getMinutes()}`;
       setPostTime(parsed);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [postLoading]);
+  }, [postLoading, postError]);
+
+  if (postError || postInfo?.articles.length === 0)
+    return (
+      <div>
+        <Image src="https://i.pinimg.com/originals/0e/3f/db/0e3fdbd5361db78ff5c9d15c5c50bb53.jpg" alt="Not found post! Error 404" />
+        <StyledTitle>Error 404 - Post not found</StyledTitle>
+        <Description>We have not post with id like this! Check it or contact with us!</Description>
+        <Author>Administration | We so sorry!</Author>
+      </div>
+    );
 
   return (
     <div>
