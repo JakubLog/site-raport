@@ -31,7 +31,7 @@ export const Wrapper = styled.div`
   left: 50%;
   bottom: 25px;
   transform: translateX(-1000%);
-  background-color: transparent;
+  background-color: white;
   width: 350px;
   height: 200px;
   border-radius: 15px;
@@ -56,7 +56,7 @@ export const Wrapper = styled.div`
   &::after {
     opacity: 1;
     transform: translateX(-50%) scaleX(1);
-    animation: ${shrink} 5s 3s;
+    animation: ${shrink} 5s 3s forwards;
     transform-origin: left top;
   }
   @media (min-width: 768px) {

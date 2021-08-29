@@ -17,7 +17,7 @@ const ErrorProvider = ({ children }: props): JSX.Element => {
     setError(message);
     setTimeout(() => {
       setError(null);
-    }, 5000);
+    }, 10000);
   };
 
   const value: contextProps = {
