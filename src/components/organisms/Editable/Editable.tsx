@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form';
 import { useError } from 'hooks/useError';
 import { Input } from 'components/atoms/Input/Input';
 import { TextArea } from './Editable.styles';
-import { useAuth } from 'hooks/useAuth';
 import { useProfile } from 'hooks/useProfile';
 
 interface props {
