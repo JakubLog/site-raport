@@ -9,34 +9,45 @@ import { useForm } from 'react-hook-form';
 import { useError } from 'hooks/useError';
 import { Input } from 'components/atoms/Input/Input';
 import { TextArea } from './Editable.styles';
+import { useAuth } from 'hooks/useAuth';
+import { useProfile } from 'hooks/useProfile';
+
 interface props {
   afterEdit: JSX.Element;
   name: string;
   isArea?: boolean;
 }
 
+const errMessage = "Something went wrong with edit protocol! Please try again! If it still doesn't work, please contact with support!";
+
 const Editable = ({ afterEdit, name, isArea }: props): JSX.Element => {
   const status = useSelector((store: RootTypes) => store.edit);
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const { dispatchError } = useError();
+  const { user, updateUserData, reloadData } = useProfile();
 
   const editSubmitProcess = (type = name) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (data: any) => {
-      switch (type) {
-        case 'NAME':
-          console.log(`Name: ${data.NAME} has been changed!`);
-          break;
-        case 'EMAIL':
-          console.log(`Email: ${data.EMAIL} has been changed!`);
-          break;
-        case 'BIO':
-          console.log(`BIO: ${data.BIO} has been changed!`);
-          break;
-        default:
-          const errMessage = "Something went wrong with edit protocol! Please try again! If it still doesn't work, please contact with support!";
-          return dispatchError ? dispatchError(errMessage) : console.error(errMessage);
+    return async (data: any) => {
+      try {
+        switch (type) {
+          case 'NAME':
+            updateUserData({ name: data.NAME });
+            break;
+          case 'EMAIL':
+            updateUserData({ email: data.EMAIL }, true);
+            break;
+          case 'BIO':
+            updateUserData({ bio: data.BIO });
+            break;
+          default:
+            throw new Error('Cannot find this type in switch');
+        }
+        reloadData(2000);
+      } catch (e) {
+        // console.log('Error:', e.message);
+        dispatchError ? dispatchError(errMessage) : console.error(errMessage);
       }
       dispatch(changeEditionState({}));
     };
@@ -49,9 +60,11 @@ const Editable = ({ afterEdit, name, isArea }: props): JSX.Element => {
       {status ? (
         <form onSubmit={handleSubmit(process)}>
           {isArea ? (
-            <TextArea id={name} {...register(name, { required: true })}></TextArea>
+            <TextArea id={name} {...register(name, { required: true })}>
+              {user.bio}
+            </TextArea>
           ) : (
-            <Input id={name} placeholder={`Editing: ${name}`} {...register(name, { required: true })} isLight />
+            <Input id={name} placeholder={`sd`} {...register(name, { required: true })} isLight />
           )}
           <ConfirmButton />
         </form>

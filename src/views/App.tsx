@@ -9,6 +9,7 @@ import Authenticate from './Authenticate/Authenticate';
 import { useAuth } from 'hooks/useAuth';
 import Profile from './Profile/Profile';
 import News from './News/News';
+import ProfileProvider from 'hooks/useProfile';
 
 const App = (): JSX.Element => {
   const { error } = useError();
@@ -26,7 +27,15 @@ const App = (): JSX.Element => {
           <Route path="/news">
             <News />
           </Route>
-          <Route path="/profile">{authUser ? <Profile /> : <Authenticate />}</Route>
+          <Route path="/profile">
+            {authUser ? (
+              <ProfileProvider>
+                <Profile />
+              </ProfileProvider>
+            ) : (
+              <Authenticate />
+            )}
+          </Route>
           <Route path="/contact">Sign in</Route>
         </Switch>
       </MainTemplate>
