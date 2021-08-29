@@ -16,9 +16,9 @@ export const Input = styled.input<{ isLight?: boolean }>`
   }
   &:focus {
     background: ${({ theme }: themeProps) => theme.colors.purpleLighten};
-    color: ${({ theme, isLight }) => (isLight ? theme.colors.purpleDarken : theme.colors.purpleLighten)};
+    color: ${({ theme }) => theme.colors.purpleDarken};
     &::placeholder {
-      color: ${({ theme, isLight }) => (isLight ? theme.colors.purpleDarken : theme.colors.purpleLighten)};
+      color: ${({ theme }) => theme.colors.purpleDarken};
     }
   }
 `;
