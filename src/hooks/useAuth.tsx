@@ -11,6 +11,7 @@ interface props {
 
 interface authContextInterface {
   authUser: Partial<firebase.User> | null;
+  changeEmail: (email: string) => Promise<void> | Error;
   login: (data: { email: string; password: string }) => Promise<firebase.auth.UserCredential>;
   loginWithGoogle: () => Promise<void>;
   register: (data: { newEmail: string; newPassword: string; confirmPassword: string }) => Promise<firebase.auth.UserCredential>;
@@ -21,7 +22,7 @@ const AuthContext = createContext<Partial<authContextInterface>>({});
 
 const AuthProvider = ({ children }: props): JSX.Element => {
   // States
-  const [currentUser, setCurrentUser] = useState<Partial<firebase.User> | null>(null);
+  const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
   const [isLoading, setLoadingState] = useState<boolean>(true);
 
   // Firebase auth methods
@@ -33,6 +34,7 @@ const AuthProvider = ({ children }: props): JSX.Element => {
   const register = ({ newEmail: email, newPassword: password }: { newEmail: string; newPassword: string; confirmPassword: string }) =>
     auth.createUserWithEmailAndPassword(email, password);
   const logout = () => auth.signOut();
+  const changeEmail = (email: string) => (currentUser ? currentUser.updateEmail(email) : new Error("currentUser doesn't exist in auth hook!"));
 
   // User mounting and demounting
   useEffect(() => {
@@ -47,6 +49,7 @@ const AuthProvider = ({ children }: props): JSX.Element => {
   // Object with context values
   const value: authContextInterface = {
     authUser: currentUser,
+    changeEmail,
     login,
     loginWithGoogle,
     register,
