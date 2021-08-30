@@ -7,8 +7,7 @@ import { changeEditionState, RootTypes } from 'store';
 import ConfirmButton from 'components/molecules/ConfirmButton/ConfirmButton';
 import { useForm } from 'react-hook-form';
 import { useError } from 'hooks/useError';
-import { Input } from 'components/atoms/Input/Input';
-import { TextArea } from './Editable.styles';
+import { TextArea, StyledInput } from './Editable.styles';
 import { useProfile } from 'hooks/useProfile';
 
 interface props {
@@ -63,7 +62,7 @@ const Editable = ({ afterEdit, name, isArea }: props): JSX.Element => {
               {user.bio}
             </TextArea>
           ) : (
-            <Input id={name} placeholder={`sd`} {...register(name, { required: true })} isLight />
+            <StyledInput id={name} placeholder={name} {...register(name, { required: true })} isLight />
           )}
           <ConfirmButton />
         </form>
