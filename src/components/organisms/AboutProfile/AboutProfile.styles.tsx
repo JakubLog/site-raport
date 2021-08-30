@@ -35,6 +35,27 @@ export const ImageWrapper = styled.div`
     grid-area: img;
     background-color: ${({ theme }: themeProps) => theme.colors.purpleDarken};
   }
+  &:hover {
+    opacity: 0.7;
+    position: relative;
+    cursor: pointer;
+    &::after {
+      content: 'Zmień zdjęcie';
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      left: 0;
+      font-size: 35px;
+      font-weight: 700;
+      color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      height: 100px;
+      background-color: ${({ theme }: themeProps) => theme.colors.purpleDarken};
+    }
+  }
 `;
 export const Image = styled.img`
   position: absolute;
@@ -84,4 +105,20 @@ export const StyledButton = styled(Button)`
   @media (min-width: 1335px) {
     grid-area: b;
   }
+`;
+export const ChangeImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  & > * {
+    margin-bottom: 15px;
+  }
+`;
+export const OldImage = styled.img`
+  width: 35%;
+  margin: 0 auto;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: ${({ theme }: themeProps) => theme.shadows.primary};
 `;
