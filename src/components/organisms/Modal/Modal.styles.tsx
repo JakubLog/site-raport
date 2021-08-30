@@ -19,8 +19,8 @@ export const Background = styled.div<{ isOpen: boolean }>`
 export const Wrapper = styled.div<{ isOpen: boolean }>`
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
   width: 100%;
-  max-width: 700px;
-  height: 550px;
+  max-width: 750px;
+  height: 600px;
   background-color: ${({ theme }: themeProps) => theme.colors.white};
   border-radius: 10px;
   box-shadow: ${({ theme }: themeProps) => theme.shadows.primary};
