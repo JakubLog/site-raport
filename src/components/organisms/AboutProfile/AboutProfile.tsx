@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Editable from '../Editable/Editable';
 import {
   StyledWrapper,
@@ -48,6 +48,7 @@ const AboutProfile = (): JSX.Element => {
                   {...register('newImage', {
                     required: true,
                     pattern:
+                      // eslint-disable-next-line no-useless-escape
                       /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gi
                   })}
                 />
