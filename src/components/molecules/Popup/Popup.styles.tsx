@@ -28,6 +28,7 @@ export const Wrapper = styled.div`
   padding: 20px;
   color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
   animation: ${slideIn} 2s forwards, ${slideOut} 1s 4s forwards;
+  z-index: 998;
 `;
 
 export const StyledTitle = styled(Title)`
