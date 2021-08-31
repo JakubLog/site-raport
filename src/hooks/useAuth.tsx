@@ -3,6 +3,7 @@ import firebase from 'firebase';
 import { auth, db } from 'firebaseConfig';
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { useError } from './useError';
+import { usePopup } from './usePopup';
 
 // Interfaces of types
 interface props {
@@ -25,6 +26,7 @@ const AuthProvider = ({ children }: props): JSX.Element => {
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
   const [isLoading, setLoadingState] = useState<boolean>(true);
   const { dispatchError } = useError();
+  const { displayPopup } = usePopup();
 
   // Firestore creating account method
   const createFirestoreAccount = async (email: string) => {
@@ -38,6 +40,7 @@ const AuthProvider = ({ children }: props): JSX.Element => {
         bio: 'This is your default BIO. If you want, change this text. BIO is text about you and your profile.',
         img: 'https://simg.nicepng.com/png/small/128-1280406_view-user-icon-png-user-circle-icon-png.png'
       });
+    displayPopup(`Pomyślnie stworzono konto! Konto zostało przypisane do tego email'a: ${email}`);
   };
 
   // Firebase auth methods

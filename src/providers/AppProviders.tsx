@@ -9,6 +9,7 @@ import AuthProvider from 'hooks/useAuth';
 import { Provider } from 'react-redux';
 import { store } from 'store';
 import ModalProvider from 'hooks/useModal';
+import PopupProvider from 'hooks/usePopup';
 
 interface props {
   children: React.ReactNode;
@@ -23,14 +24,16 @@ const AppProviders = ({ children }: props): JSX.Element => {
     <Provider store={store}>
       <Router>
         <ErrorProvider>
-          <ModalProvider>
-            <ClientContext.Provider value={client}>
-              <ThemeProvider theme={theme}>
-                <GlobalStyles />
-                <AuthProvider>{children}</AuthProvider>
-              </ThemeProvider>
-            </ClientContext.Provider>
-          </ModalProvider>
+          <PopupProvider>
+            <ModalProvider>
+              <ClientContext.Provider value={client}>
+                <ThemeProvider theme={theme}>
+                  <GlobalStyles />
+                  <AuthProvider>{children}</AuthProvider>
+                </ThemeProvider>
+              </ClientContext.Provider>
+            </ModalProvider>
+          </PopupProvider>
         </ErrorProvider>
       </Router>
     </Provider>

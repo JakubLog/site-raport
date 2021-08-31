@@ -4,6 +4,7 @@ import React, { useEffect, useState, createContext, useContext } from 'react';
 import { db } from 'firebaseConfig';
 import { useAuth } from './useAuth';
 import { useError } from './useError';
+import { usePopup } from './usePopup';
 
 // TypeScript interfaces
 interface props {
@@ -48,6 +49,7 @@ const ProfileProvider = ({ children }: props): JSX.Element => {
   const [user, setUser] = useState<any>({});
   const { dispatchError } = useError();
   const { authUser, logout } = useAuth();
+  const { displayPopup } = usePopup();
 
   // Registration user object on hook start
   useEffect(() => {
@@ -143,6 +145,7 @@ const ProfileProvider = ({ children }: props): JSX.Element => {
         .collection('users')
         .doc(await getUserId(id))
         .update(object);
+      displayPopup('Zmieniamy twoje dane, skutki powinny być widoczne w przeciągu kilku sekund lub po odświeżeniu strony!');
     } catch (e) {
       handleError(e, true);
       setTimeout(() => logout && logout(), 7000);

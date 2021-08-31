@@ -11,10 +11,14 @@ import Profile from './Profile/Profile';
 import News from './News/News';
 import ProfileProvider from 'hooks/useProfile';
 import Modal from 'components/organisms/Modal/Modal';
+import { usePopup } from 'hooks/usePopup';
+import Popup from 'components/molecules/Popup/Popup';
 
 const App = (): JSX.Element => {
   const { error } = useError();
   const { authUser } = useAuth();
+  const { popup } = usePopup();
+
   return (
     <>
       <MainTemplate>
@@ -41,6 +45,7 @@ const App = (): JSX.Element => {
         </Switch>
       </MainTemplate>
       <Modal />
+      {popup ? <Popup message={popup} /> : null}
       {error ? <Error message={error} /> : null}
     </>
   );
