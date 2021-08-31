@@ -35,7 +35,8 @@ const AuthProvider = ({ children }: props): JSX.Element => {
       .set({
         email: email,
         name: email.split('@')[0],
-        bio: 'This is your default BIO. If you want, change this text. BIO is text about you and your profile.'
+        bio: 'This is your default BIO. If you want, change this text. BIO is text about you and your profile.',
+        img: 'https://simg.nicepng.com/png/small/128-1280406_view-user-icon-png-user-circle-icon-png.png'
       });
   };
 

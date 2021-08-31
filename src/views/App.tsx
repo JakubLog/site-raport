@@ -10,6 +10,7 @@ import { useAuth } from 'hooks/useAuth';
 import Profile from './Profile/Profile';
 import News from './News/News';
 import ProfileProvider from 'hooks/useProfile';
+import Modal from 'components/organisms/Modal/Modal';
 
 const App = (): JSX.Element => {
   const { error } = useError();
@@ -39,6 +40,7 @@ const App = (): JSX.Element => {
           <Route path="/contact">Sign in</Route>
         </Switch>
       </MainTemplate>
+      <Modal />
       {error ? <Error message={error} /> : null}
     </>
   );

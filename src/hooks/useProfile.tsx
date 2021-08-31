@@ -15,6 +15,7 @@ interface userTypes {
   name: any;
   email: any;
   bio: any;
+  img: any;
 }
 
 interface contextTypes {
@@ -34,7 +35,8 @@ const ProfileContext = createContext<contextTypes>({
     id: 'Loading...',
     name: 'Loading...',
     email: 'Loading...',
-    bio: 'Loading...'
+    bio: 'Loading...',
+    img: '#'
   },
   getUserId: (email: string) => new Promise(() => Promise.resolve()),
   getUserData: (data: any, email = 'none') => new Promise(() => Promise.resolve()),
@@ -54,14 +56,16 @@ const ProfileProvider = ({ children }: props): JSX.Element => {
         id: await getUserId(authUser?.email),
         name: await getUserData('name'),
         email: await getUserData('email'),
-        bio: await getUserData('bio')
+        bio: await getUserData('bio'),
+        img: await getUserData('img')
       }))();
     return () =>
       setUser({
         id: 'Loading...',
         name: 'Loading...',
         email: 'Loading...',
-        bio: 'Loading...'
+        bio: 'Loading...',
+        img: '#'
       });
   }, []);
 
@@ -120,7 +124,8 @@ const ProfileProvider = ({ children }: props): JSX.Element => {
           id: await getUserId(authUser?.email),
           name: await getUserData('name'),
           email: await getUserData('email'),
-          bio: await getUserData('bio')
+          bio: await getUserData('bio'),
+          img: await getUserData('img')
         }),
       timeout
     );

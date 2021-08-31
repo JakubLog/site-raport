@@ -8,6 +8,7 @@ import { GraphQLClient, ClientContext } from 'graphql-hooks';
 import AuthProvider from 'hooks/useAuth';
 import { Provider } from 'react-redux';
 import { store } from 'store';
+import ModalProvider from 'hooks/useModal';
 
 interface props {
   children: React.ReactNode;
@@ -22,12 +23,14 @@ const AppProviders = ({ children }: props): JSX.Element => {
     <Provider store={store}>
       <Router>
         <ErrorProvider>
-          <ClientContext.Provider value={client}>
-            <ThemeProvider theme={theme}>
-              <GlobalStyles />
-              <AuthProvider>{children}</AuthProvider>
-            </ThemeProvider>
-          </ClientContext.Provider>
+          <ModalProvider>
+            <ClientContext.Provider value={client}>
+              <ThemeProvider theme={theme}>
+                <GlobalStyles />
+                <AuthProvider>{children}</AuthProvider>
+              </ThemeProvider>
+            </ClientContext.Provider>
+          </ModalProvider>
         </ErrorProvider>
       </Router>
     </Provider>
