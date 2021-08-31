@@ -115,10 +115,25 @@ export const ChangeImageWrapper = styled.div`
     margin-bottom: 15px;
   }
 `;
-export const OldImage = styled.img`
-  width: 35%;
+export const ChangeImage = styled.img`
+  width: 100%;
+  max-width: 250px;
   margin: 0 auto;
   border-radius: 15px;
   margin-bottom: 20px;
   box-shadow: ${({ theme }: themeProps) => theme.shadows.primary};
+`;
+export const ImagesWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  * {
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
 `;
