@@ -106,34 +106,3 @@ export const StyledButton = styled(Button)`
     grid-area: b;
   }
 `;
-export const ChangeImageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  & > * {
-    margin-bottom: 15px;
-  }
-`;
-export const ChangeImage = styled.img`
-  width: 100%;
-  max-width: 250px;
-  margin: 0 auto;
-  border-radius: 15px;
-  margin-bottom: 20px;
-  box-shadow: ${({ theme }: themeProps) => theme.shadows.primary};
-`;
-export const ImagesWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  * {
-    &:not(:last-child) {
-      margin-bottom: 15px;
-    }
-  }
-`;
