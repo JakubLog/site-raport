@@ -15,7 +15,7 @@ const PopupContext = createContext<contextProps>({
   displayPopup: (message: string) => console.log(message)
 });
 const PopupProvider = ({ children }: props): JSX.Element => {
-  const [popup, setPopup] = useState<string | null>('lorem ');
+  const [popup, setPopup] = useState<string | null>(null);
 
   const displayPopup = (message: string) => {
     setPopup(message);
