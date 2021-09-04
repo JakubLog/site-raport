@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'graphql-hooks';
 import Loading from 'components/molecules/Loading/Loading';
-import { Image, StyledTitle, Description, Author } from './Post.styles';
+import { Image, StyledTitle, Description, Author, Favorite } from './Post.styles';
 import Share from 'components/molecules/Share/Share';
+import { useError } from 'hooks/useError';
 
 interface postProps {
   id: string;
@@ -19,6 +20,10 @@ interface postProps {
 }
 
 const Post = (): JSX.Element => {
+  // Global variables, hooks
+  const { dispatchError } = useError();
+
+  // Post getting mechanisms
   const { id: postId } = useParams<{ id: string }>();
   const query = `{
     articles(where: {id: "${postId}"}) {
@@ -36,7 +41,6 @@ const Post = (): JSX.Element => {
   }
   `;
   const { data: postInfo, loading: postLoading, error: postError } = useQuery(query);
-
   const [postTime, setPostTime] = useState('Loading...');
   useEffect(() => {
     if (!postLoading && !postError) {
@@ -48,6 +52,34 @@ const Post = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postLoading, postError]);
 
+  // Post favorite adding mechanism
+  const [isActive, setActiveState] = useState(false);
+  const [favoriteLoading, setFavoriteLoading] = useState(true);
+
+  useEffect(() => {
+    setActiveState(false);
+    setFavoriteLoading(false);
+  }, []);
+
+  const changingFavorite = () => {
+    setActiveState((prev) => {
+      try {
+        if (prev === true) {
+          console.log('Deleting protocol');
+        }
+        if (prev === false) {
+          console.log('Adding protocol');
+        }
+      } catch (err) {
+        // console.error(err.message);
+        const errMessage = 'Something went wrong with adding this post to your profile. Please try again or contact with us!';
+        dispatchError ? dispatchError(errMessage) : console.error(errMessage);
+      }
+      return !prev;
+    });
+  };
+
+  // Error handling
   if (postError || postInfo?.articles.length === 0)
     return (
       <div>
@@ -60,11 +92,11 @@ const Post = (): JSX.Element => {
 
   return (
     <div>
-      {postLoading ? (
+      {postLoading || favoriteLoading ? (
         <Loading />
       ) : (
         postInfo.articles.map(({ title, description, createdBy: { name }, id, image: { url } }: postProps) => (
-          <div key={id}>
+          <div key={id} style={{ position: 'relative' }}>
             <Image src={url} alt={title} />
             <StyledTitle>{title}</StyledTitle>
             <Description>{description}</Description>
@@ -72,6 +104,7 @@ const Post = (): JSX.Element => {
               {name} | {postTime}
             </Author>
             <Share url={window.location.href} />
+            {isActive ? <Favorite isActive onClick={changingFavorite} /> : <Favorite onClick={changingFavorite} />}
           </div>
         ))
       )}
