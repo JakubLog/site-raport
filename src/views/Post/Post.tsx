@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'graphql-hooks';
 import Loading from 'components/molecules/Loading/Loading';
@@ -58,7 +58,7 @@ const Post = (): JSX.Element => {
   const [isActive, setActiveState] = useState(false);
   const [favoriteLoading, setFavoriteLoading] = useState(true);
   const { user } = useProfile();
-  const { isFavoritePost } = useFavorite();
+  const { isFavoritePost, addFavoritePost } = useFavorite();
 
   useEffect(() => {
     (async () => {
@@ -73,14 +73,14 @@ const Post = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, postId]);
 
-  const changingFavorite = () => {
+  const changingFavorite = useCallback(() => {
     setActiveState((prev) => {
       try {
         if (prev === true) {
           console.log('Deleting protocol');
         }
         if (prev === false) {
-          console.log('Adding protocol');
+          addFavoritePost(postId, user.id);
         }
       } catch (err) {
         // console.error(err.message);
@@ -89,7 +89,7 @@ const Post = (): JSX.Element => {
       }
       return !prev;
     });
-  };
+  }, [postId, user, dispatchError]);
 
   // Error handling
   if (postError || postInfo?.articles.length === 0)

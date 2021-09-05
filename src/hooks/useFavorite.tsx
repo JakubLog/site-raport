@@ -11,6 +11,7 @@ interface props {
 
 interface contextTypes {
   isFavoritePost: (postId: string, userId: string) => Promise<false | undefined>;
+  addFavoritePost: (postId: string, userId: string) => Promise<void>;
 }
 
 // Global error message
@@ -18,7 +19,8 @@ const errMessage = 'Sorry, something went wrong with post. Please try again.';
 
 // Context for hook
 const FavoriteContext = createContext<contextTypes>({
-  isFavoritePost: (postId: string, userId: string) => new Promise<false | undefined>((resolve, reject) => resolve(false))
+  isFavoritePost: (postId: string, userId: string) => new Promise<false | undefined>((resolve, reject) => resolve(false)),
+  addFavoritePost: (postId: string, userId: string) => new Promise<void>((resolve, reject) => resolve())
 });
 const FavoriteProvider = ({ children }: props): JSX.Element => {
   // Global hooks, states etc.
@@ -59,10 +61,23 @@ const FavoriteProvider = ({ children }: props): JSX.Element => {
   };
 
   // 2. Setters
+  const addFavoritePost = async (postId: string, userId: string) => {
+    try {
+      if (postId === undefined || postId === null) throw new Error('PostID in "isFavoritePost" function is undefined or null type.');
+      if (userId === null || userId === undefined) throw new Error('UserID in "isFavoritePost" function is undefined or null type.');
+      const isExist = await isFavoritePost(postId, userId);
+      if (!isExist) {
+        await db.collection(`users/${userId}/favorite`).doc().set({ id: postId });
+      }
+    } catch (e) {
+      handleError(e, true);
+    }
+  };
 
   // Context values object
   const value: contextTypes = {
-    isFavoritePost
+    isFavoritePost,
+    addFavoritePost
   };
 
   return <FavoriteContext.Provider value={value}>{children}</FavoriteContext.Provider>;
