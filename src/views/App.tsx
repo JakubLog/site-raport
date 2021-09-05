@@ -9,10 +9,11 @@ import Authenticate from './Authenticate/Authenticate';
 import { useAuth } from 'hooks/useAuth';
 import Profile from './Profile/Profile';
 import News from './News/News';
-import ProfileProvider from 'hooks/useProfile';
+import FavoriteProvider from 'hooks/useFavorite';
 import Modal from 'components/organisms/Modal/Modal';
 import { usePopup } from 'hooks/usePopup';
 import Popup from 'components/molecules/Popup/Popup';
+import ProfileProvider from 'hooks/useProfile';
 
 const App = (): JSX.Element => {
   const { error } = useError();
@@ -27,7 +28,11 @@ const App = (): JSX.Element => {
             <Home />
           </Route>
           <Route path="/post/:id">
-            <Post />
+            <ProfileProvider errorVisible={false}>
+              <FavoriteProvider>
+                <Post />
+              </FavoriteProvider>
+            </ProfileProvider>
           </Route>
           <Route path="/news">
             <News />

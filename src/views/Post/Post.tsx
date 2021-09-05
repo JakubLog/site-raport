@@ -5,6 +5,8 @@ import Loading from 'components/molecules/Loading/Loading';
 import { Image, StyledTitle, Description, Author, Favorite } from './Post.styles';
 import Share from 'components/molecules/Share/Share';
 import { useError } from 'hooks/useError';
+import { useProfile } from 'hooks/useProfile';
+import { useFavorite } from 'hooks/useFavorite';
 
 interface postProps {
   id: string;
@@ -55,11 +57,21 @@ const Post = (): JSX.Element => {
   // Post favorite adding mechanism
   const [isActive, setActiveState] = useState(false);
   const [favoriteLoading, setFavoriteLoading] = useState(true);
+  const { user } = useProfile();
+  const { isFavoritePost } = useFavorite();
 
   useEffect(() => {
-    setActiveState(false);
-    setFavoriteLoading(false);
-  }, []);
+    (async () => {
+      setFavoriteLoading(true);
+      if (user.email !== undefined) {
+        setActiveState(false);
+        const response = await isFavoritePost(postId, user.id);
+        response && setActiveState(response);
+      }
+      setFavoriteLoading(false);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, postId]);
 
   const changingFavorite = () => {
     setActiveState((prev) => {
@@ -104,7 +116,7 @@ const Post = (): JSX.Element => {
               {name} | {postTime}
             </Author>
             <Share url={window.location.href} />
-            {isActive ? <Favorite isActive onClick={changingFavorite} /> : <Favorite onClick={changingFavorite} />}
+            {user.email && <Favorite isActive={isActive} onClick={changingFavorite} />}
           </div>
         ))
       )}
