@@ -89,6 +89,7 @@ const Post = (): JSX.Element => {
       }
       return !prev;
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postId, user, dispatchError]);
 
   // Error handling
