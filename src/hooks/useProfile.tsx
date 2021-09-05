@@ -73,14 +73,14 @@ const ProfileProvider = ({ children }: props): JSX.Element => {
 
   // Handle error function for this hook
   const handleError = (error: any, displayProvided = false) => {
-    console.error(error);
+    // console.error(error);
     if (displayProvided) return dispatchError ? dispatchError(error.message) : console.error(error.message);
     return dispatchError ? dispatchError(errMessage) : console.error(errMessage);
   };
 
   // Hook methods:
 
-  // Getters
+  // 1. Getters
   const getUserId = async (email: string | null | undefined) => {
     try {
       if (email === null || email === undefined) throw new Error('Email in "getUserId" function is undefined or null type.');
