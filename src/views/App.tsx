@@ -40,7 +40,9 @@ const App = (): JSX.Element => {
           <Route path="/profile">
             {authUser ? (
               <ProfileProvider>
-                <Profile />
+                <FavoriteProvider>
+                  <Profile />
+                </FavoriteProvider>
               </ProfileProvider>
             ) : (
               <Authenticate />

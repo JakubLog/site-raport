@@ -58,7 +58,7 @@ const Post = (): JSX.Element => {
   const [isActive, setActiveState] = useState(false);
   const [favoriteLoading, setFavoriteLoading] = useState(true);
   const { user } = useProfile();
-  const { isFavoritePost, addFavoritePost } = useFavorite();
+  const { isFavoritePost, addFavoritePost, removeFavoritePost } = useFavorite();
 
   useEffect(() => {
     (async () => {
@@ -77,7 +77,7 @@ const Post = (): JSX.Element => {
     setActiveState((prev) => {
       try {
         if (prev === true) {
-          console.log('Deleting protocol');
+          removeFavoritePost(postId, user.id);
         }
         if (prev === false) {
           addFavoritePost(postId, user.id);
