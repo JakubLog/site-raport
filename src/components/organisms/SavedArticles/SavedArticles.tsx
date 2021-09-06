@@ -37,7 +37,15 @@ const SavedArticles = (): JSX.Element => {
           tylko będziesz chciał, a jeżeli ci się już znudzą, możesz je usunąć i zastąpić nowymi!
         </StyledSubTitle>
       </Header>
-      <Content>{isLoading ? <Loading /> : favorite.map((id, i) => <Favorite postId={id} iteration={i} />)}</Content>
+      <Content>
+        {favorite.length === 0 ? (
+          'Obecnie nie masz zapisanych żadnych postów, zmień to!'
+        ) : isLoading ? (
+          <Loading />
+        ) : (
+          favorite.map((id, i) => <Favorite postId={id} iteration={i} />)
+        )}
+      </Content>
     </StyledWrapper>
   );
 };
