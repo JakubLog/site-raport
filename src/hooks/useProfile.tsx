@@ -9,6 +9,7 @@ import { usePopup } from './usePopup';
 // TypeScript interfaces
 interface props {
   children: React.ReactNode;
+  errorVisible?: boolean;
 }
 
 interface userTypes {
@@ -44,7 +45,7 @@ const ProfileContext = createContext<contextTypes>({
   updateUserData: (object: { [key: string]: string }, isEmail?: boolean) => new Promise(() => Promise.resolve()),
   reloadData: (timeout?: number) => console.log()
 });
-const ProfileProvider = ({ children }: props): JSX.Element => {
+const ProfileProvider = ({ children, errorVisible = true }: props): JSX.Element => {
   // Global hooks, states etc.
   const [user, setUser] = useState<any>({});
   const { dispatchError } = useError();
@@ -73,14 +74,16 @@ const ProfileProvider = ({ children }: props): JSX.Element => {
 
   // Handle error function for this hook
   const handleError = (error: any, displayProvided = false) => {
-    console.error(error);
-    if (displayProvided) return dispatchError ? dispatchError(error.message) : console.error(error.message);
-    return dispatchError ? dispatchError(errMessage) : console.error(errMessage);
+    // console.error(error);
+    if (errorVisible) {
+      if (displayProvided) return dispatchError ? dispatchError(error.message) : console.error(error.message);
+      return dispatchError ? dispatchError(errMessage) : console.error(errMessage);
+    } else return;
   };
 
   // Hook methods:
 
-  // Getters
+  // 1. Getters
   const getUserId = async (email: string | null | undefined) => {
     try {
       if (email === null || email === undefined) throw new Error('Email in "getUserId" function is undefined or null type.');

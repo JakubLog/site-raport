@@ -60,3 +60,29 @@ export const Author = styled.div`
     padding-right: 30px;
   }
 `;
+export const Favorite = styled.div<{ isActive?: boolean }>`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: ${({ theme }: themeProps) => theme.colors.purpleDark};
+  box-shadow: ${({ theme }: themeProps) => theme.shadows.primary};
+  &:hover {
+    cursor: pointer;
+    background-color: ${({ theme }: themeProps) => theme.colors.purpleDarken};
+  }
+  &::after {
+    content: '';
+    opacity: ${({ isActive }) => (isActive ? 1 : 0)};
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: ${({ theme }: themeProps) => theme.colors.purple};
+  }
+`;
