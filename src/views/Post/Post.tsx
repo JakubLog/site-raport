@@ -7,6 +7,7 @@ import Share from 'components/molecules/Share/Share';
 import { useError } from 'hooks/useError';
 import { useProfile } from 'hooks/useProfile';
 import { useFavorite } from 'hooks/useFavorite';
+import { usePopup } from 'hooks/usePopup';
 
 interface postProps {
   id: string;
@@ -59,6 +60,7 @@ const Post: React.FC = () => {
   const [favoriteLoading, setFavoriteLoading] = useState(true);
   const { user } = useProfile();
   const { isFavoritePost, addFavoritePost, removeFavoritePost } = useFavorite();
+  const { displayPopup } = usePopup();
 
   useEffect(() => {
     (async () => {
@@ -78,9 +80,11 @@ const Post: React.FC = () => {
       try {
         if (prev === true) {
           removeFavoritePost(postId, user.id);
+          displayPopup('Usunięto artykuł z ulubionych!');
         }
         if (prev === false) {
           addFavoritePost(postId, user.id);
+          displayPopup('Dodano artykuł do ulubionych!');
         }
       } catch (err) {
         // console.error(err.message);
