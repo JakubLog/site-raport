@@ -6,6 +6,7 @@ import Loading from 'components/molecules/Loading/Loading';
 import Favorite from 'components/molecules/Favorite/Favorite';
 
 const SavedArticles = (): JSX.Element => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [favorite, setFavorite] = useState<any[]>([]);
   const [isLoading, setLoadingState] = useState(true);
   const { user } = useProfile();
