@@ -6,9 +6,6 @@ import { useError } from './useError';
 import { usePopup } from './usePopup';
 
 // Interfaces of types
-interface props {
-  children: React.ReactNode;
-}
 
 interface authContextInterface {
   authUser: Partial<firebase.User> | null;
@@ -21,7 +18,7 @@ interface authContextInterface {
 
 const AuthContext = createContext<Partial<authContextInterface>>({});
 
-const AuthProvider = ({ children }: props): JSX.Element => {
+const AuthProvider: React.FC = ({ children }) => {
   // States
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
   const [isLoading, setLoadingState] = useState<boolean>(true);

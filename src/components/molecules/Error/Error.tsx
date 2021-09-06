@@ -3,12 +3,12 @@ import propTypes from 'prop-types';
 import { ErrorContent, ErrorTitle, Wrapper } from './Error.styles';
 
 interface props {
-  message: string;
+  message?: string;
 }
 
 const defaultMessage = 'Something went wrong. We still trying make this site better and you can help us! Please, contact with support!';
 
-const Error = ({ message = defaultMessage }: props): JSX.Element => {
+const Error: React.FC<props> = ({ message = defaultMessage }) => {
   return (
     <Wrapper>
       <ErrorTitle>Ooops!</ErrorTitle>

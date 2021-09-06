@@ -14,7 +14,7 @@ interface props {
   url: string;
 }
 
-const Share = ({ url }: props): JSX.Element => {
+const Share: React.FC<props> = ({ url }) => {
   return (
     <ShareIcons>
       <FBShare url={url}>

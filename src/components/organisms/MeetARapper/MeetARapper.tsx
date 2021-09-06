@@ -4,7 +4,7 @@ import { Image, Content } from './MeetARapper.styles';
 import Loading from 'components/molecules/Loading/Loading';
 import { useQuery } from 'graphql-hooks';
 
-const MeetARapper = (): JSX.Element => {
+const MeetARapper: React.FC = () => {
   const { data, loading } = useQuery(`{rappers(last: 1){id,image{url},name,description}}`);
 
   return (

@@ -3,7 +3,7 @@ import FeedBase from 'components/molecules/FeedBase/FeedBase';
 import { PlaylistsList } from './Playlists.styles';
 import Playlist from 'components/molecules/Playlist/Playlist';
 
-const Playlists = (): JSX.Element => {
+const Playlists: React.FC = () => {
   return (
     <FeedBase title="Playlists" height="400" bgColor="#05001A">
       <PlaylistsList>

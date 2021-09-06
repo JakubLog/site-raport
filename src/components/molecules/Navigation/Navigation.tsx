@@ -1,7 +1,7 @@
 import React from 'react';
 import { Wrapper, StyledLink } from './Navigation.styles';
 
-const Navigation = (): JSX.Element => {
+const Navigation: React.FC = () => {
   return (
     <Wrapper>
       <StyledLink exact to="/">

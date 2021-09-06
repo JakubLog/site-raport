@@ -1,10 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import { useError } from './useError';
 
-interface props {
-  children: React.ReactNode;
-}
-
 interface contextProps {
   popup: string | null;
   displayPopup: (message: string) => void;
@@ -14,7 +10,7 @@ const PopupContext = createContext<contextProps>({
   popup: 'no popup...',
   displayPopup: (message: string) => console.log(message)
 });
-const PopupProvider = ({ children }: props): JSX.Element => {
+const PopupProvider: React.FC = ({ children }) => {
   const [popup, setPopup] = useState<string | null>(null);
 
   const displayPopup = (message: string) => {

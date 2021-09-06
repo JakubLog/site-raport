@@ -11,15 +11,11 @@ import { store } from 'store';
 import ModalProvider from 'hooks/useModal';
 import PopupProvider from 'hooks/usePopup';
 
-interface props {
-  children: React.ReactNode;
-}
-
 const client = new GraphQLClient({
   url: 'https://api-eu-central-1.graphcms.com/v2/cksa4671l2di901z3e3fu2qlq/master'
 });
 
-const AppProviders = ({ children }: props): JSX.Element => {
+const AppProviders: React.FC = ({ children }) => {
   return (
     <Provider store={store}>
       <Router>

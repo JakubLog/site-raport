@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import { StyledWrapper, LogoBefore, Logo } from './NavBar.styles';
 import Navigation from 'components/molecules/Navigation/Navigation';
 
-const NavBar = (): JSX.Element => {
+const NavBar: React.FC = () => {
   const history = useHistory();
   return (
     <StyledWrapper>

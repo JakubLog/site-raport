@@ -25,7 +25,7 @@ interface rapperProps {
   };
 }
 
-const Home = (): JSX.Element => {
+const Home: React.FC = () => {
   const { data: dataNews, loading: isLoadingNews } = useQuery(`{articles(last: 1){id,image{url},title,description}}`);
   const { data: dataRapper, loading: isLoadingRapper } = useQuery(`{rappers(last: 1){id,image{url},name,description}}`);
 

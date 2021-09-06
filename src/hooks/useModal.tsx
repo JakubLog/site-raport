@@ -10,10 +10,6 @@ interface contextTypes {
   title: string;
 }
 
-interface props {
-  children: React.ReactNode;
-}
-
 // Global error message for hook
 const errMessage = 'Sorry, something went wrong with Modal! Please, contact with us!';
 
@@ -25,7 +21,7 @@ const ModalContext = createContext<contextTypes>({
   content: <div>Empty.</div>,
   title: 'No title'
 });
-const ModalProvider = ({ children }: props): JSX.Element => {
+const ModalProvider: React.FC = ({ children }) => {
   // Global variables, hook's functions
   const [isOpen, setOpenState] = useState<boolean>(false);
   const [content, setContent] = useState<JSX.Element>(<div>Empty.</div>);

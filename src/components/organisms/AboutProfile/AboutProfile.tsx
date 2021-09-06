@@ -6,7 +6,7 @@ import { useProfile } from 'hooks/useProfile';
 import ChangeImage from 'components/molecules/ChangeImage/ChangeImage';
 import { useModal } from 'hooks/useModal';
 
-const AboutProfile = (): JSX.Element => {
+const AboutProfile: React.FC = () => {
   const { logout } = useAuth();
   const { user, updateUserData } = useProfile();
   const { openModal } = useModal();

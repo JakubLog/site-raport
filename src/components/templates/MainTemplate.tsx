@@ -2,11 +2,7 @@ import React from 'react';
 import NavBar from 'components/organisms/NavBar/NavBar';
 import Footer from 'components/molecules/Footer/Footer';
 
-interface props {
-  children: React.ReactNode;
-}
-
-const MainTemplate = ({ children }: props): JSX.Element => {
+const MainTemplate: React.FC = ({ children }) => {
   return (
     <>
       <NavBar />

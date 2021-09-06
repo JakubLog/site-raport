@@ -9,7 +9,7 @@ interface formProps {
   email: string;
 }
 
-const Newsletter = (): JSX.Element => {
+const Newsletter: React.FC = () => {
   const [isAdded, setIsAddedState] = useState(false);
 
   const {

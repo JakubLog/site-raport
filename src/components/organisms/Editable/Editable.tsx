@@ -18,7 +18,7 @@ interface props {
 
 const errMessage = "Something went wrong with edit protocol! Please try again! If it still doesn't work, please contact with support!";
 
-const Editable = ({ afterEdit, name, isArea }: props): JSX.Element => {
+const Editable: React.FC<props> = ({ afterEdit, name, isArea }) => {
   const status = useSelector((store: RootTypes) => store.edit);
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();

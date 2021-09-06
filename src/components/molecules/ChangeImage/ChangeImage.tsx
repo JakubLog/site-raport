@@ -13,7 +13,7 @@ interface props {
   updateUserData: any;
 }
 
-const ChangeImage = ({ user, updateUserData }: props): JSX.Element => {
+const ChangeImage: React.FC<props> = ({ user, updateUserData }) => {
   const { openModal } = useModal();
   const { register, handleSubmit } = useForm();
 

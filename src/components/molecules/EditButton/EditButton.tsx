@@ -4,7 +4,7 @@ import { StyledButton } from './EditButton.styles';
 import { changeEditionState, RootTypes } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
 
-const EditButton = (): JSX.Element => {
+const EditButton: React.FC = () => {
   const status = useSelector((store: RootTypes) => store.edit);
   const dispatch = useDispatch();
 

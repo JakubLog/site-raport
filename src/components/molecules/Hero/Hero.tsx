@@ -2,7 +2,7 @@ import React from 'react';
 import HeroSrc from 'assets/img/hero.jpg';
 import { HeroWrapper, HeroImage, HeroContent, Header, Subheader } from './Hero.styles';
 
-const Hero = (): JSX.Element => {
+const Hero: React.FC = () => {
   return (
     <HeroWrapper>
       <HeroImage src={HeroSrc} alt="Hero image" />

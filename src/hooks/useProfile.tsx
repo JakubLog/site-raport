@@ -8,7 +8,6 @@ import { usePopup } from './usePopup';
 
 // TypeScript interfaces
 interface props {
-  children: React.ReactNode;
   errorVisible?: boolean;
 }
 
@@ -45,7 +44,7 @@ const ProfileContext = createContext<contextTypes>({
   updateUserData: (object: { [key: string]: string }, isEmail?: boolean) => new Promise(() => Promise.resolve()),
   reloadData: (timeout?: number) => console.log()
 });
-const ProfileProvider = ({ children, errorVisible = true }: props): JSX.Element => {
+const ProfileProvider: React.FC<props> = ({ children, errorVisible = true }) => {
   // Global hooks, states etc.
   const [user, setUser] = useState<any>({});
   const { dispatchError } = useError();

@@ -5,9 +5,6 @@ import { db } from 'firebaseConfig';
 import { useError } from './useError';
 
 // TypeScript interfaces
-interface props {
-  children: React.ReactNode;
-}
 
 interface contextTypes {
   isFavoritePost: (postId: string, userId: string) => Promise<false | undefined>;
@@ -26,7 +23,7 @@ const FavoriteContext = createContext<contextTypes>({
   addFavoritePost: (postId: string, userId: string) => new Promise<void>((resolve, reject) => resolve()),
   removeFavoritePost: (postId: string, userId: string) => new Promise<void>((resolve, reject) => resolve())
 });
-const FavoriteProvider = ({ children }: props): JSX.Element => {
+const FavoriteProvider: React.FC = ({ children }) => {
   // Global hooks, states etc.
   const { dispatchError } = useError();
 

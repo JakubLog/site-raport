@@ -3,7 +3,7 @@ import { useProfile } from 'hooks/useProfile';
 import React from 'react';
 import { StyledWrapper, Header, StyledTitle, Content, StyledParagraph } from './Bio.styles';
 
-const Bio = (): JSX.Element => {
+const Bio: React.FC = () => {
   const { user } = useProfile();
 
   return (

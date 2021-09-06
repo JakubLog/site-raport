@@ -10,7 +10,7 @@ interface props {
   postId: string;
 }
 
-const LatestNews = ({ postId, title, description, imageSrc }: props): JSX.Element => {
+const LatestNews: React.FC<props> = ({ postId, title, description, imageSrc }) => {
   const history = useHistory();
   const postUrl = `/post/${postId}`;
 

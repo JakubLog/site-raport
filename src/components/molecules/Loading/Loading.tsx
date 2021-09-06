@@ -7,7 +7,7 @@ interface props {
   fullScreen?: boolean;
 }
 
-const Loading = ({ autoSize = false, fullScreen = false }: props): JSX.Element => {
+const Loading: React.FC<props> = ({ autoSize = false, fullScreen = false }) => {
   return (
     <LoadingWrapper autoSize={autoSize} fullScreen={fullScreen}>
       {!autoSize && <LoadingText>Loading...</LoadingText>}

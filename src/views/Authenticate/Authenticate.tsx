@@ -18,7 +18,7 @@ interface signUpProps {
   confirmPassword: string;
 }
 
-const Authenticate = (): JSX.Element => {
+const Authenticate: React.FC = () => {
   // States
   const [signInError, setSignInError] = useState<boolean | null>(null);
   const [signUpError, setSignUpError] = useState<boolean | null>(null);

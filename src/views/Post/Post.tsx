@@ -21,7 +21,7 @@ interface postProps {
   };
 }
 
-const Post = (): JSX.Element => {
+const Post: React.FC = () => {
   // Global variables, hooks
   const { dispatchError } = useError();
 

@@ -15,7 +15,7 @@ import { usePopup } from 'hooks/usePopup';
 import Popup from 'components/molecules/Popup/Popup';
 import ProfileProvider from 'hooks/useProfile';
 
-const App = (): JSX.Element => {
+const App: React.FC = () => {
   const { error } = useError();
   const { authUser } = useAuth();
   const { popup } = usePopup();

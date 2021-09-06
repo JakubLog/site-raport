@@ -3,7 +3,7 @@ import { SocialButtons as SocialButtonsWrapper } from './SocialButtons.styles';
 import { SocialButton } from 'components/atoms/SocialButton/SocialButton';
 import { useAuth } from 'hooks/useAuth';
 
-const SocialButtons = (): JSX.Element => {
+const SocialButtons: React.FC = () => {
   const { loginWithGoogle } = useAuth();
   return (
     <SocialButtonsWrapper>

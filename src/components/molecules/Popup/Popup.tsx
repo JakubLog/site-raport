@@ -8,7 +8,7 @@ interface props {
 
 const defaultMessage = 'Chcemy tylko powiedzieć... że jesteś najlepszy!';
 
-const Popup = ({ message = defaultMessage }: props): JSX.Element => {
+const Popup: React.FC<props> = ({ message = defaultMessage }) => {
   return (
     <Wrapper>
       <StyledTitle>Uwaga!</StyledTitle>

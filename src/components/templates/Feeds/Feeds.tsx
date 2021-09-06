@@ -4,7 +4,7 @@ import MeetARapper from 'components/organisms/MeetARapper/MeetARapper';
 import Playlists from 'components/organisms/Playlists/Playlists';
 import { Wrapper } from './Feeds.styles';
 
-const Feeds = (): JSX.Element => {
+const Feeds: React.FC = () => {
   return (
     <Wrapper>
       <SongOfTheDay />
