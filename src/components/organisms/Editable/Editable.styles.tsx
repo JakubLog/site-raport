@@ -32,6 +32,6 @@ export const StyledInput = styled(Input)`
   text-align: left;
   margin: 10px 25px;
   @media (min-width: 768px) {
-    margin: 10px 0;
+    margin: 20px 0;
   }
 `;

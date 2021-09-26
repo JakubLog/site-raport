@@ -1,11 +1,17 @@
 import { createSlice, configureStore, combineReducers } from '@reduxjs/toolkit';
 
+export const initialState = {
+  name: false,
+  email: false,
+  bio: false
+};
+
 const edit = createSlice({
   name: 'edit',
-  initialState: false,
+  initialState: initialState,
   reducers: {
-    changeEditionState(state, action) {
-      return !state;
+    changeEditionState(state, action: { payload: { name: keyof typeof initialState }; type: string }) {
+      return { ...state, [action.payload.name]: !state[action.payload.name] };
     }
   }
 });

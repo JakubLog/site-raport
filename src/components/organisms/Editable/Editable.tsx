@@ -9,10 +9,11 @@ import { useForm } from 'react-hook-form';
 import { useError } from 'hooks/useError';
 import { TextArea, StyledInput } from './Editable.styles';
 import { useProfile } from 'hooks/useProfile';
+import { initialState } from 'store';
 
 interface props {
   afterEdit: JSX.Element;
-  name: string;
+  name: keyof typeof initialState;
   isArea?: boolean;
 }
 
@@ -30,14 +31,14 @@ const Editable: React.FC<props> = ({ afterEdit, name, isArea }) => {
     return async (data: any) => {
       try {
         switch (type) {
-          case 'NAME':
-            updateUserData({ name: data.NAME });
+          case 'name':
+            updateUserData({ name: data.name });
             break;
-          case 'EMAIL':
-            updateUserData({ email: data.EMAIL }, true);
+          case 'email':
+            updateUserData({ email: data.email }, true);
             break;
-          case 'BIO':
-            updateUserData({ bio: data.BIO });
+          case 'bio':
+            updateUserData({ bio: data.bio });
             break;
           default:
             throw new Error('Cannot find this type in switch');
@@ -47,7 +48,7 @@ const Editable: React.FC<props> = ({ afterEdit, name, isArea }) => {
         // console.log('Error:', e.message);
         dispatchError ? dispatchError(errMessage) : console.error(errMessage);
       }
-      dispatch(changeEditionState({}));
+      dispatch(changeEditionState({ name }));
     };
   };
 
@@ -55,7 +56,7 @@ const Editable: React.FC<props> = ({ afterEdit, name, isArea }) => {
 
   return (
     <EditableWrapper>
-      {status ? (
+      {status[name] ? (
         <form onSubmit={handleSubmit(process)}>
           {isArea ? (
             <TextArea id={name} {...register(name, { required: true })}>
@@ -69,13 +70,12 @@ const Editable: React.FC<props> = ({ afterEdit, name, isArea }) => {
       ) : (
         { ...afterEdit }
       )}
-      <EditButton />
+      <EditButton name={name} />
     </EditableWrapper>
   );
 };
 
 Editable.propTypes = {
-  name: PropTypes.string.isRequired,
   isArea: PropTypes.bool
 };
 

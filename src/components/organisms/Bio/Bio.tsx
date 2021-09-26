@@ -12,7 +12,7 @@ const Bio: React.FC = () => {
         <StyledTitle>Opowiedz coś o sobie</StyledTitle>
       </Header>
       <Content>
-        <Editable afterEdit={<StyledParagraph>{user.bio}</StyledParagraph>} name="BIO" isArea />
+        <Editable afterEdit={<StyledParagraph>{user.bio}</StyledParagraph>} name="bio" isArea />
       </Content>
     </StyledWrapper>
   );
