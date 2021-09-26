@@ -5,7 +5,7 @@ import { Button } from 'components/atoms/Button/Button';
 
 export const Background = styled.div<{ isOpen: boolean }>`
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100vw;
@@ -24,7 +24,7 @@ export const Wrapper = styled.div<{ isOpen: boolean }>`
   background-color: ${({ theme }: themeProps) => theme.colors.white};
   border-radius: 10px;
   box-shadow: ${({ theme }: themeProps) => theme.shadows.primary};
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
