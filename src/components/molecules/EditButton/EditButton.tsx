@@ -1,18 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { StyledButton } from './EditButton.styles';
 import { changeEditionState, RootTypes } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
+import { initialState } from 'store';
 
-const EditButton: React.FC = () => {
+interface props {
+  name: keyof typeof initialState;
+}
+
+const EditButton: React.FC<props> = ({ name }) => {
   const status = useSelector((store: RootTypes) => store.edit);
   const dispatch = useDispatch();
 
-  return <StyledButton onClick={() => dispatch(changeEditionState({}))}>{!status ? <p>✎</p> : null}</StyledButton>;
-};
-
-EditButton.propTypes = {
-  isActive: PropTypes.bool
+  return <StyledButton onClick={() => dispatch(changeEditionState({ name }))}>{!status[name] ? <p>✎</p> : null}</StyledButton>;
 };
 
 export default EditButton;

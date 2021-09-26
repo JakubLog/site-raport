@@ -17,8 +17,8 @@ const AboutProfile: React.FC = () => {
         <Image src={user.img} alt={`${user.name}'s image`} />
       </ImageWrapper>
       <Informations>
-        <Editable afterEdit={<Name>{user.name}</Name>} name="NAME" />
-        <Editable afterEdit={<Email href={`mailto:${user.email}`}>{user.email}</Email>} name="EMAIL" />
+        <Editable afterEdit={<Name>{user.name}</Name>} name="name" />
+        <Editable afterEdit={<Email href={`mailto:${user.email}`}>{user.email}</Email>} name="email" />
       </Informations>
       <StyledButton onClick={logout}>Wyloguj się</StyledButton>
     </StyledWrapper>
