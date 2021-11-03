@@ -2,7 +2,7 @@ import React from 'react';
 import { GlobalStyles } from 'assets/css/GlobalStyles';
 import { theme } from 'assets/css/theme';
 import { ThemeProvider } from 'styled-components';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import ErrorProvider from 'hooks/useError';
 import { GraphQLClient, ClientContext } from 'graphql-hooks';
 import AuthProvider from 'hooks/useAuth';
