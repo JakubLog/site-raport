@@ -14,6 +14,7 @@ import Modal from 'components/organisms/Modal/Modal';
 import { usePopup } from 'hooks/usePopup';
 import Popup from 'components/molecules/Popup/Popup';
 import ProfileProvider from 'hooks/useProfile';
+import Contact from './Contact/Contact';
 
 const App: React.FC = () => {
   const { error } = useError();
@@ -48,7 +49,9 @@ const App: React.FC = () => {
               <Authenticate />
             )}
           </Route>
-          <Route path="/contact">Sign in</Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
         </Switch>
       </MainTemplate>
       <Modal />
