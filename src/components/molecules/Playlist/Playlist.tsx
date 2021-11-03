@@ -8,7 +8,7 @@ interface props {
   link: string;
 }
 
-const Playlist = ({ name, imageSrc, link }: props): JSX.Element => {
+const Playlist: React.FC<props> = ({ name, imageSrc, link }) => {
   return (
     <Wrapper href={link} target="_blank">
       <Image src={imageSrc} alt={name} />

@@ -35,6 +35,27 @@ export const ImageWrapper = styled.div`
     grid-area: img;
     background-color: ${({ theme }: themeProps) => theme.colors.purpleDarken};
   }
+  &:hover {
+    opacity: 0.7;
+    position: relative;
+    cursor: pointer;
+    &::after {
+      content: 'Zmień zdjęcie';
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      left: 0;
+      font-size: 35px;
+      font-weight: 700;
+      color: ${({ theme }: themeProps) => theme.colors.purpleLighten};
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      height: 100px;
+      background-color: ${({ theme }: themeProps) => theme.colors.purpleDarken};
+    }
+  }
 `;
 export const Image = styled.img`
   position: absolute;

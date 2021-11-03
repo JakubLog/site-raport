@@ -1,7 +1,7 @@
 import React from 'react';
 import { Wrapper } from './Footer.styles';
 
-const Footer = (): JSX.Element => {
+const Footer: React.FC = () => {
   return (
     <Wrapper>
       <span>raport.com &copy; 2021</span>

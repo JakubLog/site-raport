@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import { StyledWrapper, Header, Title, Content } from './FeedBase.styles';
 
 interface props {
-  children: React.ReactNode;
   height: string;
   bgColor: string;
   title: string;
 }
 
-const FeedBase = ({ children, height, bgColor, title }: props): JSX.Element => {
+const FeedBase: React.FC<props> = ({ children, height, bgColor, title }) => {
   return (
     <StyledWrapper bgColor={bgColor} height={height}>
       <Header>

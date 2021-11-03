@@ -4,10 +4,11 @@ import React, { useEffect, useState, createContext, useContext } from 'react';
 import { db } from 'firebaseConfig';
 import { useAuth } from './useAuth';
 import { useError } from './useError';
+import { usePopup } from './usePopup';
 
 // TypeScript interfaces
 interface props {
-  children: React.ReactNode;
+  errorVisible?: boolean;
 }
 
 interface userTypes {
@@ -15,6 +16,7 @@ interface userTypes {
   name: any;
   email: any;
   bio: any;
+  img: any;
 }
 
 interface contextTypes {
@@ -34,18 +36,20 @@ const ProfileContext = createContext<contextTypes>({
     id: 'Loading...',
     name: 'Loading...',
     email: 'Loading...',
-    bio: 'Loading...'
+    bio: 'Loading...',
+    img: '#'
   },
   getUserId: (email: string) => new Promise(() => Promise.resolve()),
   getUserData: (data: any, email = 'none') => new Promise(() => Promise.resolve()),
   updateUserData: (object: { [key: string]: string }, isEmail?: boolean) => new Promise(() => Promise.resolve()),
   reloadData: (timeout?: number) => console.log()
 });
-const ProfileProvider = ({ children }: props): JSX.Element => {
+const ProfileProvider: React.FC<props> = ({ children, errorVisible = true }) => {
   // Global hooks, states etc.
   const [user, setUser] = useState<any>({});
   const { dispatchError } = useError();
   const { authUser, logout } = useAuth();
+  const { displayPopup } = usePopup();
 
   // Registration user object on hook start
   useEffect(() => {
@@ -54,27 +58,31 @@ const ProfileProvider = ({ children }: props): JSX.Element => {
         id: await getUserId(authUser?.email),
         name: await getUserData('name'),
         email: await getUserData('email'),
-        bio: await getUserData('bio')
+        bio: await getUserData('bio'),
+        img: await getUserData('img')
       }))();
     return () =>
       setUser({
         id: 'Loading...',
         name: 'Loading...',
         email: 'Loading...',
-        bio: 'Loading...'
+        bio: 'Loading...',
+        img: '#'
       });
   }, []);
 
   // Handle error function for this hook
   const handleError = (error: any, displayProvided = false) => {
-    console.error(error);
-    if (displayProvided) return dispatchError ? dispatchError(error.message) : console.error(error.message);
-    return dispatchError ? dispatchError(errMessage) : console.error(errMessage);
+    // console.error(error);
+    if (errorVisible) {
+      if (displayProvided) return dispatchError ? dispatchError(error.message) : console.error(error.message);
+      return dispatchError ? dispatchError(errMessage) : console.error(errMessage);
+    } else return;
   };
 
   // Hook methods:
 
-  // Getters
+  // 1. Getters
   const getUserId = async (email: string | null | undefined) => {
     try {
       if (email === null || email === undefined) throw new Error('Email in "getUserId" function is undefined or null type.');
@@ -120,7 +128,8 @@ const ProfileProvider = ({ children }: props): JSX.Element => {
           id: await getUserId(authUser?.email),
           name: await getUserData('name'),
           email: await getUserData('email'),
-          bio: await getUserData('bio')
+          bio: await getUserData('bio'),
+          img: await getUserData('img')
         }),
       timeout
     );
@@ -138,6 +147,7 @@ const ProfileProvider = ({ children }: props): JSX.Element => {
         .collection('users')
         .doc(await getUserId(id))
         .update(object);
+      displayPopup('Zmieniamy twoje dane, skutki powinny być widoczne w przeciągu kilku sekund lub po odświeżeniu strony!');
     } catch (e) {
       handleError(e, true);
       setTimeout(() => logout && logout(), 7000);

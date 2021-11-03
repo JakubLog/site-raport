@@ -27,7 +27,7 @@ const slideOut = keyframes`
 
 export const Wrapper = styled.div`
   --red: ${({ theme }: themeProps) => theme.colors.error};
-  position: absolute;
+  position: fixed;
   left: 50%;
   bottom: 25px;
   transform: translateX(-1000%);

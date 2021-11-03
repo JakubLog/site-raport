@@ -4,7 +4,7 @@ import Bio from 'components/organisms/Bio/Bio';
 import { Wrapper } from './Profile.styles';
 import SavedArticles from 'components/organisms/SavedArticles/SavedArticles';
 
-const Profile = (): JSX.Element => {
+const Profile: React.FC = () => {
   return (
     <Wrapper>
       <AboutProfile />

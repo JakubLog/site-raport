@@ -12,7 +12,7 @@ interface article {
   };
 }
 
-const PostSpoilers = (): JSX.Element => {
+const PostSpoilers: React.FC = () => {
   // States
   const [articles, setArticles] = useState([]);
 

@@ -1,5 +1,6 @@
-import { themeProps } from 'assets/css/theme';
 import styled from 'styled-components';
+import { Input } from 'components/atoms/Input/Input';
+import { themeProps } from 'assets/css/theme';
 
 export const EditableWrapper = styled.div`
   display: flex;
@@ -25,4 +26,12 @@ export const TextArea = styled.textarea`
   font-family: Arial, Helvetica, sans-serif;
   color: ${({ theme }: themeProps) => theme.colors.white};
   border-radius: 10px;
+`;
+
+export const StyledInput = styled(Input)`
+  text-align: left;
+  margin: 10px 25px;
+  @media (min-width: 768px) {
+    margin: 20px 0;
+  }
 `;

@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'graphql-hooks';
 import Loading from 'components/molecules/Loading/Loading';
-import { Image, StyledTitle, Description, Author } from './Post.styles';
+import { Image, StyledTitle, Description, Author, Favorite } from './Post.styles';
 import Share from 'components/molecules/Share/Share';
+import { useError } from 'hooks/useError';
+import { useProfile } from 'hooks/useProfile';
+import { useFavorite } from 'hooks/useFavorite';
+import { usePopup } from 'hooks/usePopup';
 
 interface postProps {
   id: string;
@@ -18,7 +22,11 @@ interface postProps {
   };
 }
 
-const Post = (): JSX.Element => {
+const Post: React.FC = () => {
+  // Global variables, hooks
+  const { dispatchError } = useError();
+
+  // Post getting mechanisms
   const { id: postId } = useParams<{ id: string }>();
   const query = `{
     articles(where: {id: "${postId}"}) {
@@ -36,7 +44,6 @@ const Post = (): JSX.Element => {
   }
   `;
   const { data: postInfo, loading: postLoading, error: postError } = useQuery(query);
-
   const [postTime, setPostTime] = useState('Loading...');
   useEffect(() => {
     if (!postLoading && !postError) {
@@ -48,6 +55,48 @@ const Post = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postLoading, postError]);
 
+  // Post favorite adding mechanism
+  const [isActive, setActiveState] = useState(false);
+  const [favoriteLoading, setFavoriteLoading] = useState(true);
+  const { user } = useProfile();
+  const { isFavoritePost, addFavoritePost, removeFavoritePost } = useFavorite();
+  const { displayPopup } = usePopup();
+
+  useEffect(() => {
+    (async () => {
+      setFavoriteLoading(true);
+      if (user.email !== undefined) {
+        setActiveState(false);
+        const response = await isFavoritePost(postId, user.id);
+        response && setActiveState(response);
+      }
+      setFavoriteLoading(false);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, postId]);
+
+  const changingFavorite = useCallback(() => {
+    setActiveState((prev) => {
+      try {
+        if (prev === true) {
+          removeFavoritePost(postId, user.id);
+          displayPopup('Usunięto artykuł z ulubionych!');
+        }
+        if (prev === false) {
+          addFavoritePost(postId, user.id);
+          displayPopup('Dodano artykuł do ulubionych!');
+        }
+      } catch (err) {
+        // console.error(err.message);
+        const errMessage = 'Something went wrong with adding this post to your profile. Please try again or contact with us!';
+        dispatchError ? dispatchError(errMessage) : console.error(errMessage);
+      }
+      return !prev;
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [postId, user, dispatchError]);
+
+  // Error handling
   if (postError || postInfo?.articles.length === 0)
     return (
       <div>
@@ -60,11 +109,11 @@ const Post = (): JSX.Element => {
 
   return (
     <div>
-      {postLoading ? (
+      {postLoading || favoriteLoading ? (
         <Loading />
       ) : (
         postInfo.articles.map(({ title, description, createdBy: { name }, id, image: { url } }: postProps) => (
-          <div key={id}>
+          <div key={id} style={{ position: 'relative' }}>
             <Image src={url} alt={title} />
             <StyledTitle>{title}</StyledTitle>
             <Description>{description}</Description>
@@ -72,6 +121,7 @@ const Post = (): JSX.Element => {
               {name} | {postTime}
             </Author>
             <Share url={window.location.href} />
+            {user.email && <Favorite isActive={isActive} onClick={changingFavorite} />}
           </div>
         ))
       )}

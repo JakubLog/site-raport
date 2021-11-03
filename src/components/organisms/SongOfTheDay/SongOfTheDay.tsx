@@ -4,7 +4,7 @@ import { Image, Content } from './SongOfTheDay.styles';
 import { useQuery } from 'graphql-hooks';
 import Loading from 'components/molecules/Loading/Loading';
 
-const SongOfTheDay = (): JSX.Element => {
+const SongOfTheDay: React.FC = () => {
   const { data, loading } = useQuery(`{songs(last: 1){id,image{url},name}}`);
 
   return (

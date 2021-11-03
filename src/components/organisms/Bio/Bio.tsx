@@ -3,7 +3,7 @@ import { useProfile } from 'hooks/useProfile';
 import React from 'react';
 import { StyledWrapper, Header, StyledTitle, Content, StyledParagraph } from './Bio.styles';
 
-const Bio = (): JSX.Element => {
+const Bio: React.FC = () => {
   const { user } = useProfile();
 
   return (
@@ -12,7 +12,7 @@ const Bio = (): JSX.Element => {
         <StyledTitle>Opowiedz coś o sobie</StyledTitle>
       </Header>
       <Content>
-        <Editable afterEdit={<StyledParagraph>{user.bio}</StyledParagraph>} name="BIO" isArea />
+        <Editable afterEdit={<StyledParagraph>{user.bio}</StyledParagraph>} name="bio" isArea />
       </Content>
     </StyledWrapper>
   );

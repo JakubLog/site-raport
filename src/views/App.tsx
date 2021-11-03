@@ -9,11 +9,18 @@ import Authenticate from './Authenticate/Authenticate';
 import { useAuth } from 'hooks/useAuth';
 import Profile from './Profile/Profile';
 import News from './News/News';
+import FavoriteProvider from 'hooks/useFavorite';
+import Modal from 'components/organisms/Modal/Modal';
+import { usePopup } from 'hooks/usePopup';
+import Popup from 'components/molecules/Popup/Popup';
 import ProfileProvider from 'hooks/useProfile';
+import Contact from './Contact/Contact';
 
-const App = (): JSX.Element => {
+const App: React.FC = () => {
   const { error } = useError();
   const { authUser } = useAuth();
+  const { popup } = usePopup();
+
   return (
     <>
       <MainTemplate>
@@ -22,7 +29,11 @@ const App = (): JSX.Element => {
             <Home />
           </Route>
           <Route path="/post/:id">
-            <Post />
+            <ProfileProvider errorVisible={false}>
+              <FavoriteProvider>
+                <Post />
+              </FavoriteProvider>
+            </ProfileProvider>
           </Route>
           <Route path="/news">
             <News />
@@ -30,15 +41,21 @@ const App = (): JSX.Element => {
           <Route path="/profile">
             {authUser ? (
               <ProfileProvider>
-                <Profile />
+                <FavoriteProvider>
+                  <Profile />
+                </FavoriteProvider>
               </ProfileProvider>
             ) : (
               <Authenticate />
             )}
           </Route>
-          <Route path="/contact">Sign in</Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
         </Switch>
       </MainTemplate>
+      <Modal />
+      {popup ? <Popup message={popup} /> : null}
       {error ? <Error message={error} /> : null}
     </>
   );

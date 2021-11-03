@@ -7,19 +7,19 @@ import { changeEditionState, RootTypes } from 'store';
 import ConfirmButton from 'components/molecules/ConfirmButton/ConfirmButton';
 import { useForm } from 'react-hook-form';
 import { useError } from 'hooks/useError';
-import { Input } from 'components/atoms/Input/Input';
-import { TextArea } from './Editable.styles';
+import { TextArea, StyledInput } from './Editable.styles';
 import { useProfile } from 'hooks/useProfile';
+import { initialState } from 'store';
 
 interface props {
   afterEdit: JSX.Element;
-  name: string;
+  name: keyof typeof initialState;
   isArea?: boolean;
 }
 
 const errMessage = "Something went wrong with edit protocol! Please try again! If it still doesn't work, please contact with support!";
 
-const Editable = ({ afterEdit, name, isArea }: props): JSX.Element => {
+const Editable: React.FC<props> = ({ afterEdit, name, isArea }) => {
   const status = useSelector((store: RootTypes) => store.edit);
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
@@ -31,14 +31,14 @@ const Editable = ({ afterEdit, name, isArea }: props): JSX.Element => {
     return async (data: any) => {
       try {
         switch (type) {
-          case 'NAME':
-            updateUserData({ name: data.NAME });
+          case 'name':
+            updateUserData({ name: data.name });
             break;
-          case 'EMAIL':
-            updateUserData({ email: data.EMAIL }, true);
+          case 'email':
+            updateUserData({ email: data.email }, true);
             break;
-          case 'BIO':
-            updateUserData({ bio: data.BIO });
+          case 'bio':
+            updateUserData({ bio: data.bio });
             break;
           default:
             throw new Error('Cannot find this type in switch');
@@ -48,7 +48,7 @@ const Editable = ({ afterEdit, name, isArea }: props): JSX.Element => {
         // console.log('Error:', e.message);
         dispatchError ? dispatchError(errMessage) : console.error(errMessage);
       }
-      dispatch(changeEditionState({}));
+      dispatch(changeEditionState({ name }));
     };
   };
 
@@ -56,27 +56,26 @@ const Editable = ({ afterEdit, name, isArea }: props): JSX.Element => {
 
   return (
     <EditableWrapper>
-      {status ? (
+      {status[name] ? (
         <form onSubmit={handleSubmit(process)}>
           {isArea ? (
             <TextArea id={name} {...register(name, { required: true })}>
               {user.bio}
             </TextArea>
           ) : (
-            <Input id={name} placeholder={`sd`} {...register(name, { required: true })} isLight />
+            <StyledInput id={name} placeholder={name} {...register(name, { required: true })} isLight />
           )}
           <ConfirmButton />
         </form>
       ) : (
         { ...afterEdit }
       )}
-      <EditButton />
+      <EditButton name={name} />
     </EditableWrapper>
   );
 };
 
 Editable.propTypes = {
-  name: PropTypes.string.isRequired,
   isArea: PropTypes.bool
 };
 

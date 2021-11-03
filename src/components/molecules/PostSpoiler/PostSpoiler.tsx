@@ -10,12 +10,12 @@ interface props {
   imageSrc?: string;
 }
 
-const PostSpoiler = ({
+const PostSpoiler: React.FC<props> = ({
   title,
   postUrl,
   description,
   imageSrc = 'https://img.freepik.com/darmowe-zdjecie/ludzie-w-festiwalu_1160-736.jpg?size=626&ext=jpg&ga=GA1.2.2140585734.1629504000'
-}: props): JSX.Element => {
+}) => {
   const history = useHistory();
 
   return (

@@ -1,16 +1,12 @@
 import React, { createContext, useContext, useState } from 'react';
 
-interface props {
-  children: React.ReactNode;
-}
-
 interface contextProps {
   error: string | null;
   dispatchError: (message: string) => void;
 }
 
 const ErrorContext = createContext<Partial<contextProps>>({});
-const ErrorProvider = ({ children }: props): JSX.Element => {
+const ErrorProvider: React.FC = ({ children }) => {
   const [error, setError] = useState<string | null>(null);
 
   const dispatchError = (message: string) => {

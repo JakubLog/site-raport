@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import { SectionBody, SectionTitle, Wrapper } from './Section.styles';
 
 interface props {
-  children: React.ReactNode;
   title: string;
   fullScreen?: boolean;
 }
 
-const Section = ({ children, fullScreen = false, title = 'Default title', ...rest }: props): JSX.Element => {
+const Section: React.FC<props> = ({ children, fullScreen = false, title = 'Default title', ...rest }) => {
   return (
     <Wrapper fullScreen={fullScreen} {...rest}>
       <SectionTitle fullScreen={fullScreen}>{title}</SectionTitle>
