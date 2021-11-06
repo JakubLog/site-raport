@@ -1,6 +1,6 @@
 import React from 'react';
 import MainTemplate from 'components/templates/MainTemplate';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { useError } from 'hooks/useError';
 import Error from 'components/molecules/Error/Error';
 import Home from './Home/Home';
@@ -25,6 +25,9 @@ const App: React.FC = () => {
     <>
       <MainTemplate>
         <Switch>
+          <Route path="/site-raport">
+            <Redirect to="/" />
+          </Route>
           <Route path="/" exact>
             <Home />
           </Route>

@@ -1,6 +1,7 @@
 {
   "name": "site-raport",
   "version": "0.1.0",
+  "homepage": "https://jakublog.github.io/site-raport/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",
@@ -29,7 +30,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test ./src/tests",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "react-scripts build",
+    "deploy": "gh-pages -b main -d build"
   },
   "browserslist": {
     "production": [
@@ -50,6 +53,7 @@
     "@typescript-eslint/parser": "^4.29.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "gh-pages": "^3.2.3",
     "prettier": "^2.3.2"
   }
 }
