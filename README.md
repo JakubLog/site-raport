@@ -20,8 +20,8 @@ Mobile version: yes 🎈
 
 PageInsights scores:
 
-- Mobile: **not now**
-- Desktop: **not now**
+- [Mobile](https://developers.google.com/speed/pagespeed/insights/?hl=pl&url=https%3A%2F%2Fjakublog.github.io%2Fsite-raport&tab=mobile): **70/100**
+- [Desktop](https://developers.google.com/speed/pagespeed/insights/?hl=pl&url=https%3A%2F%2Fjakublog.github.io%2Fsite-raport&tab=desktop): **98/100**
 
 ## How can I try it? 🤔
 
